@@ -20,7 +20,7 @@ public class cat : MonoBehaviour
         run = 1.0f;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Vector2 direction = player.position - transform.position;
         float distance = direction.magnitude;
