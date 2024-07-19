@@ -56,7 +56,7 @@ public class Teleport : MonoBehaviour
         
 
         // 다음 방의 가상 카메라 활성화
-        nextRoomCamera.Priority = 10;
+        nextRoomCamera.Priority = 1;
 
         // 가상 카메라의 경계 업데이트
         CinemachineConfiner confiner = nextRoomCamera.GetComponent<CinemachineConfiner>();
