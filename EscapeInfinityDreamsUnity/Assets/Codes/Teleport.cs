@@ -15,12 +15,21 @@ public class Teleport : MonoBehaviour
     private bool isTeleporting = false; // 텔레포트 중복 방지 플래그
     private bool canTeleport = false; // 텔레포트 가능 여부 플래그
 
+    public GameObject interactionUI; // 배경을 포함한 UI 오브젝트(text_background)
+    public Vector3 uiOffset; // UI 오브젝트의 출력 위치 조정
+
+    private void Start()
+    {
+        interactionUI.SetActive(false); //시작할 때, 텍스트를 숨김
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)//문과 충돌 감지
     {
         if (collision.CompareTag("Player"))//부딪힌 대상이 플레이어인지 확인
         {
             targetObj = collision.gameObject;//플레이어의 게임 오브젝트를 받음
             canTeleport = true; // 텔레포트 가능 여부 설정
+            interactionUI.SetActive(true); // 텍스트를 보이게 함
         }
     }
 
@@ -29,6 +38,7 @@ public class Teleport : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             canTeleport = false; // 텔레포트 가능 여부 해제
+            interactionUI.SetActive(false); // 텍스트를 숨김
         }
     }
 
@@ -38,6 +48,11 @@ public class Teleport : MonoBehaviour
         if (canTeleport && !isTeleporting && Input.GetKeyDown(KeyCode.E))
         {
             StartCoroutine(TeleportRoutine());//텔레포트를 시작
+        }
+        // 플레이어 기준으로 UI 위치 업데이트
+        if (canTeleport)
+        {
+            interactionUI.transform.position = targetObj.transform.position + uiOffset;
         }
     }
 
@@ -69,5 +84,6 @@ public class Teleport : MonoBehaviour
         yield return new WaitForSeconds(teleportCooldown); // 쿨다운 시간 동안 대기
 
         isTeleporting = false; // 텔레포트 종료
+        interactionUI.SetActive(false); //텔레포트 종료 후 텍스트를 숨김
     }
 }
