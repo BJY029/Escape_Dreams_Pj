@@ -45,13 +45,15 @@ public class Teleport : MonoBehaviour
     {
         isTeleporting = true; // 텔레포트 시작
 
-        targetObj.transform.position = toObj.transform.position; //플레이어 이동
-        catObj.transform.position = toObj.transform.position; //고양이 이동
+		// 현재 방의 가상 카메라 비활성화
+		thisRoomCamera.Priority = 0;
 
-        yield return null; // 한 프레임 대기
+		targetObj.transform.position = toObj.transform.position; //플레이어 이동
+        catObj.transform.position = new Vector3(toObj.transform.position.x, toObj.transform.position.y - 1f, toObj.transform.position.z); //고양이 이동
 
-        // 현재 방의 가상 카메라 비활성화
-        thisRoomCamera.Priority = 0;
+        yield return new WaitForEndOfFrame(); // 한 프레임 대기
+
+        
 
         // 다음 방의 가상 카메라 활성화
         nextRoomCamera.Priority = 10;
