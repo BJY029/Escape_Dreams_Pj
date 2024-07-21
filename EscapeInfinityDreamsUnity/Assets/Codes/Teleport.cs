@@ -38,7 +38,8 @@ public class Teleport : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             canTeleport = false; // 텔레포트 가능 여부 해제
-            interactionUI.SetActive(false); // 텍스트를 숨김
+            if(interactionUI!=null)
+                interactionUI.SetActive(false); // 텍스트를 숨김
         }
     }
 
