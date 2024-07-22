@@ -22,8 +22,8 @@ public class UiSystem : MonoBehaviour
 	private bool isUiActived;  //종이 UI가 현재 띄어져있는지 구분하기 위한 Bool형 변수
 	private int flag;	//각 UI를 구분하기 위한 플래그
 
-	public LightController lightController;
-	public TextMeshProUGUI sleepText;
+	public LightController lightController; //FadeOut 효과를 적용하기 위해 해당 스크립트를 불러온다.
+	public TextMeshProUGUI sleepText; //잠에 들 때, 상호작용 UI의 텍스트 내용을 변경하기 위해 불러온다.
 
 
 	//초기화
@@ -87,6 +87,7 @@ public class UiSystem : MonoBehaviour
 					StartCoroutine(extRoutine());
 					break;
 				case 4:
+					//잠에 들 때 씬 전환과 각종 효과들을 위한 코루틴 호출
 					StartCoroutine(bedRoutine());
 					break;
 				default:
@@ -136,12 +137,16 @@ public class UiSystem : MonoBehaviour
 		Extensonmeter.SetActive(false); //비활성화
 	}
 
+	//잠에 드는 코루틴 호출
 	IEnumerator bedRoutine()
 	{
+		//해당 상호작용 텍스트를 다음과 같이 변경
 		sleepText.text = "잠에 드는 중..";
 
+		//LightController의 FadeOutLight() 코루틴 호출
 		yield return lightController.FadeOutLight();
 
+		//다음 씬 로드
 		SceneManager.LoadScene("testScene");
 	}
 
