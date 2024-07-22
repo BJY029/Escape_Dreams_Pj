@@ -25,9 +25,10 @@ public class UiSystem : MonoBehaviour
 	public LightController lightController; //FadeOut 효과를 적용하기 위해 해당 스크립트를 불러온다.
 	public TextMeshProUGUI sleepText; //잠에 들 때, 상호작용 UI의 텍스트 내용을 변경하기 위해 불러온다.
 
+	public GameObject slotItem; //슬롯아이템 지정, 지금은 콜라 UI
 
-	//초기화
-	private void Awake()
+    //초기화
+    private void Awake()
 	{
 		if (interactionUI != null) 
 		{ 
@@ -49,8 +50,7 @@ public class UiSystem : MonoBehaviour
 	}
 
 
-
-	private void Update()
+    private void Update()
 	{
 		if (!isInteracted) return;	//UI와 상호작용 가능할 때만 실행
 		
@@ -80,7 +80,17 @@ public class UiSystem : MonoBehaviour
 				case 2:
 					//자판기 UI를 활성화 시키는 코루틴 호출
 					StartCoroutine(VandingRoutine());
-					break;
+					//인벤토리에 콜라 획득
+					Inventory inven = GetComponent<Inventory>();
+					for (int i = 0; i < inven.slots.Count; i++) {
+						if (inven.slots[i].isEmpty) {
+							Instantiate(slotItem, inven.slots[i].slotObj.transform, false);
+							inven.slots[i].isEmpty = false;
+							break;
+						}
+					}
+                    break;
+
 				//신장계 UI와 상호작용 한 경우
 				case 3:
 					//신장계 UI를 활성화 시키는 코루틴 호출

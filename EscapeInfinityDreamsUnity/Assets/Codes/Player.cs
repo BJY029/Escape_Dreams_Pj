@@ -11,8 +11,8 @@ public class Player : MonoBehaviour
 	Animator animator;
 	SpriteRenderer spriteRenderer;
 
-	//시작과 동시에 초기화 하는 목록들
-	private void Awake()
+    //시작과 동시에 초기화 하는 목록들
+    private void Awake()
 	{
 		run = 1.0f;
 		rb = GetComponent<Rigidbody2D>();
@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
 	}
 
 	//Update가 완전히 끝난 후 프레임당 한 번 호출되는 함수다.
-	//플레이어의 움직임을 Update에서 완료 후, 이도앟ㄴ 위치에 따라 카메라의 위치를 수정하는
+	//플레이어의 움직임을 Update에서 완료 후, 이동한 위치에 따라 카메라의 위치를 수정하는
 	//방식을 구현할 때 사용
 	private void LateUpdate()
 	{
