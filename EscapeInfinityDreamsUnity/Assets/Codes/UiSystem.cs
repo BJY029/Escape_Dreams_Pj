@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class UiSystem : MonoBehaviour
 {
@@ -19,6 +21,9 @@ public class UiSystem : MonoBehaviour
 	private bool isInteracted;	//상호작용 UI를 띄우기 위한 Bool형 변수
 	private bool isUiActived;  //종이 UI가 현재 띄어져있는지 구분하기 위한 Bool형 변수
 	private int flag;	//각 UI를 구분하기 위한 플래그
+
+	public LightController lightController;
+	public TextMeshProUGUI sleepText;
 
 
 	//초기화
@@ -81,6 +86,9 @@ public class UiSystem : MonoBehaviour
 					//신장계 UI를 활성화 시키는 코루틴 호출
 					StartCoroutine(extRoutine());
 					break;
+				case 4:
+					StartCoroutine(bedRoutine());
+					break;
 				default:
 					break;
 			}
@@ -128,6 +136,15 @@ public class UiSystem : MonoBehaviour
 		Extensonmeter.SetActive(false); //비활성화
 	}
 
+	IEnumerator bedRoutine()
+	{
+		sleepText.text = "잠에 드는 중..";
+
+		yield return lightController.FadeOutLight();
+
+		SceneManager.LoadScene("testScene");
+	}
+
 
 	//특정 콜라이더와 충돌한 경우
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -146,6 +163,11 @@ public class UiSystem : MonoBehaviour
 		{
 			//함수 호출(flag : 3로 설정)
 			ShowUIInteraction(3);
+		}
+		else if (collision.CompareTag("bed")) //충돌한 콜라이더의 태그가 침대
+		{
+			//함수 호출(flag : 4로 설정)
+			ShowUIInteraction(4);
 		}
 	}
 
@@ -166,7 +188,7 @@ public class UiSystem : MonoBehaviour
 	private void OnTriggerExit2D(Collider2D collision)
 	{
 		//어떤 콜라이더를 벗어나든 상관없이
-		if (collision.CompareTag("Paper") || collision.CompareTag("vandingMachine") || collision.CompareTag("extensometer"))
+		if (collision.CompareTag("Paper") || collision.CompareTag("vandingMachine") || collision.CompareTag("extensometer") || collision.CompareTag("bed"))
 		{
 			//오류 방지 조건문
 			if (interactionUI != null)
