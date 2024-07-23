@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1e58f5d025c399540b724792244802dc
+guid: 7af244a2ee5c4414f816f2fa0e80fe2d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 20
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,43 +97,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Eye_Original
+      name: posters_dirty_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 15
-        width: 100
-        height: 160
+        x: 2
+        y: 2
+        width: 10
+        height: 11
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 33242cf42315fd14fb910c72561e567a
-      internalID: 353067299
+      spriteID: cc48d319a0b539b4fb76ed25a2c9cb7d
+      internalID: -576712761
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Eye_Change
+      name: posters_dirty_1
       rect:
         serializedVersion: 2
-        x: 130
-        y: 15
-        width: 100
-        height: 160
+        x: 16
+        y: 2
+        width: 10
+        height: 11
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e50bf679606b40d4fb7705fee6ed6e32
-      internalID: 793097629
+      spriteID: 953502e365eb9e44492318612797a5f6
+      internalID: -1863321035
       vertices: []
       indices: 
       edges: []
@@ -149,8 +149,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Eye_Change: 793097629
-      Eye_Original: 353067299
+      posters_dirty_0: -576712761
+      posters_dirty_1: -1863321035
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
