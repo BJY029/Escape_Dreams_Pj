@@ -23,12 +23,13 @@ public class UiSystem : MonoBehaviour
 	private int flag;	//각 UI를 구분하기 위한 플래그
 
 	public LightController lightController; //FadeOut 효과를 적용하기 위해 해당 스크립트를 불러온다.
+	public abnorbalManager abnorbalManager;
 	public TextMeshProUGUI sleepText; //잠에 들 때, 상호작용 UI의 텍스트 내용을 변경하기 위해 불러온다.
 
 	public GameObject slotItem; //슬롯아이템 지정, 지금은 콜라 UI
 
     //초기화
-    private void Awake()
+    public void Awake()
 	{
 		if (interactionUI != null) 
 		{ 
@@ -43,6 +44,7 @@ public class UiSystem : MonoBehaviour
 		VandingMachine.SetActive(false);
 		Extensonmeter.SetActive(false);
 
+		sleepText.text ="E키로 상호작용";
 
 		isInteracted = false;
 		isUiActived = false;
@@ -157,7 +159,11 @@ public class UiSystem : MonoBehaviour
 		yield return lightController.FadeOutLight();
 
 		//다음 씬 로드
-		SceneManager.LoadScene("testScene");
+		abnorbalManager.nextStage();
+
+		this.Awake();
+
+		yield return lightController.FadeInLight();
 	}
 
 

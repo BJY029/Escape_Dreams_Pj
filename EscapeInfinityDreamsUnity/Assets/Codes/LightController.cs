@@ -13,19 +13,23 @@ public class LightController : MonoBehaviour
     public SpriteRenderer Player;
     public SpriteRenderer Cat;
 	public Color targetColor = Color.white;
+    private float GlobalLightIntensity;
+    private float RoomLightIntensity;
 
-    void Start()
-    {
-        StartCoroutine(FadeInLight()); //게임 시작시 빛이 켜지는 코루틴 실행
-    }
+	private void Awake()
+	{
+		GlobalLightIntensity = GlobalLight.intensity;
+        RoomLightIntensity = RoomLight.intensity;
+	}
 
-    //빛이 켜지는 코루틴
-    public IEnumerator FadeInLight()
+
+	//빛이 켜지는 코루틴
+	public IEnumerator FadeInLight()
     {
         float elapsedTime = 0f; //기준 시간 초기화
         float initialIntensity = 0f;   //빛의 초기화 값
-        float GtargetIntensity = GlobalLight.intensity; //GlobalLight의 목표 빛 값
-        float RtargetIntensity = RoomLight.intensity; //RoomLight의 목표 빛 값
+        float GtargetIntensity = GlobalLightIntensity; //GlobalLight의 목표 빛 값
+        float RtargetIntensity = RoomLightIntensity; //RoomLight의 목표 빛 값
 
         //처음 색상(검은색)
         Color initialColor = Color.black;
@@ -67,8 +71,8 @@ public class LightController : MonoBehaviour
     public IEnumerator FadeOutLight()
     {
         float elapsedTime = 0f; //기준 시간 초기화
-        float GInitialIntensity = GlobalLight.intensity; //GlobalLight의 초기화 값
-        float RInitialIntensity = RoomLight.intensity; //RoomLight의 초기화 값
+        float GInitialIntensity = GlobalLightIntensity; //GlobalLight의 초기화 값
+        float RInitialIntensity = RoomLightIntensity; //RoomLight의 초기화 값
         float targetIntensity = 0f; //각 빛의 목표 값
 
         //처음 색상(플레이어 색상(흰색))
