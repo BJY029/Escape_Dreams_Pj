@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class UiSystem : MonoBehaviour
 {
@@ -29,6 +30,9 @@ public class UiSystem : MonoBehaviour
 
 	public GameObject slotItem; //슬롯아이템 지정, 지금은 콜라 UI
 
+	public bool isBedCoroutineRunning;
+	public EventSystem eventSystem;
+
     //초기화
     public void Awake()
 	{
@@ -50,6 +54,7 @@ public class UiSystem : MonoBehaviour
 
 		isInteracted = false;
 		isUiActived = false;
+		isBedCoroutineRunning = false;
 		flag = 0;
 	}
 
@@ -60,7 +65,14 @@ public class UiSystem : MonoBehaviour
 		
 		//상호작용 UI의 위치 설정
 		interactionUI.transform.position = transform.position + uiOffset;
-		
+
+		if (isBedCoroutineRunning == true)
+		{
+			eventSystem.enabled = false;
+			return;
+		}
+
+		eventSystem.enabled = true;
 		//상호작용 키가 눌렸을 때
 		if(Input.GetKeyDown(KeyCode.E)) 
 		{
@@ -166,6 +178,8 @@ public class UiSystem : MonoBehaviour
     //잠에 드는 코루틴 호출
     IEnumerator bedRoutine()
 	{
+		isBedCoroutineRunning = true;
+
 		//해당 상호작용 텍스트를 다음과 같이 변경
 		sleepText.text = "잠에 드는 중..";
 
@@ -178,6 +192,8 @@ public class UiSystem : MonoBehaviour
 		this.Awake();
 
 		yield return lightController.FadeInLight();
+
+		isBedCoroutineRunning = false;
 	}
 
 

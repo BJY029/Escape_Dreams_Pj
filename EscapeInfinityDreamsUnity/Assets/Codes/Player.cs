@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
 	Animator animator;
 	SpriteRenderer spriteRenderer;
+
+	public UiSystem uiSystem;
 
     //시작과 동시에 초기화 하는 목록들
     private void Awake()
@@ -24,6 +27,14 @@ public class Player : MonoBehaviour
 	//프레임마다 작업량이 다르므로 호출 주기가 일정하지 않다.
 	private void Update()
 	{
+		if (uiSystem.isBedCoroutineRunning == true)
+		{
+			uiSystem.eventSystem.enabled = false;
+			return;
+		}
+
+		uiSystem.eventSystem.enabled = true;
+
 		//키보드로 입력받은 값을 Vector.x값에 저장
 		inputVec.x = Input.GetAxisRaw("Horizontal");
 
