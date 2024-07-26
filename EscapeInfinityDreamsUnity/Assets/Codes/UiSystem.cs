@@ -10,8 +10,9 @@ public class UiSystem : MonoBehaviour
 	public GameObject Paper;	//종이 UI
 	public GameObject VandingMachine; //자판기 UI
 	public GameObject Extensonmeter; //신장계 UI
+    public GameObject Ab_Extensonmeter; //신장계 이상현상 UI
 
-	[Header("# UI Set")]
+    [Header("# UI Set")]
 	public GameObject interactionUI; // 배경을 포함한 UI 오브젝트(text_background)
 	public GameObject interactionUIforOut; //종이 UI에서 생성할 UI 오브젝트
 	public Vector3 uiOffset; // UI 오브젝트의 출력 위치 조정
@@ -43,8 +44,9 @@ public class UiSystem : MonoBehaviour
 		Paper.SetActive(false);
 		VandingMachine.SetActive(false);
 		Extensonmeter.SetActive(false);
+        Ab_Extensonmeter.SetActive(false);
 
-		sleepText.text ="E키로 상호작용";
+        sleepText.text ="E키로 상호작용";
 
 		isInteracted = false;
 		isUiActived = false;
@@ -98,11 +100,15 @@ public class UiSystem : MonoBehaviour
 					//신장계 UI를 활성화 시키는 코루틴 호출
 					StartCoroutine(extRoutine());
 					break;
-				case 4:
+                case 4:
 					//잠에 들 때 씬 전환과 각종 효과들을 위한 코루틴 호출
 					StartCoroutine(bedRoutine());
 					break;
-				default:
+                case 6:
+                    //신장계 이상현상 UI를 활성화 시키는 코루틴 호출
+                    StartCoroutine(Ab_extRoutine());
+                    break;
+                default:
 					break;
 			}
 		}
@@ -149,8 +155,16 @@ public class UiSystem : MonoBehaviour
 		Extensonmeter.SetActive(false); //비활성화
 	}
 
-	//잠에 드는 코루틴 호출
-	IEnumerator bedRoutine()
+    //이상현상 신장계 UI를 일정시간 동아 활성화 시키는 코루틴
+    IEnumerator Ab_extRoutine()
+    {
+        Ab_Extensonmeter.SetActive(true); //해당 UI를 활성화
+        yield return new WaitForSeconds(displayDuration); //설정한 시간만큼 대기
+        Ab_Extensonmeter.SetActive(false); //비활성화
+    }
+
+    //잠에 드는 코루틴 호출
+    IEnumerator bedRoutine()
 	{
 		//해당 상호작용 텍스트를 다음과 같이 변경
 		sleepText.text = "잠에 드는 중..";
@@ -190,7 +204,12 @@ public class UiSystem : MonoBehaviour
 			//함수 호출(flag : 4로 설정)
 			ShowUIInteraction(4);
 		}
-	}
+        else if (collision.CompareTag("Ab_extensometer")) //충돌한 콜라이더의 태그가 이상현상 신장계
+        {
+            //함수 호출(flag : 6로 설정)
+            ShowUIInteraction(6);
+        }
+    }
 
 	//해당 UI와 관련된 것들을 바꾸는 함수
 	private void ShowUIInteraction(int interactionFlag)

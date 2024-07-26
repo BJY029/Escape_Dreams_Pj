@@ -8,6 +8,7 @@ TagManager:
   - extensometer
   - vandingMachine
   - bed
+  - Ab_extensometer
   layers:
   - Default
   - TransparentFX
