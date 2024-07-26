@@ -31,7 +31,7 @@ public class UiSystem : MonoBehaviour
 	public GameObject slotItem; //슬롯아이템 지정, 지금은 콜라 UI
 
 	//중복 키 적용을 막기 위한 플래그 설정
-	public bool isBedCoroutineRunning;
+	public bool isBedCoroutineRunning = false;
 	public EventSystem eventSystem;
 
     //초기화
@@ -55,7 +55,7 @@ public class UiSystem : MonoBehaviour
 
 		isInteracted = false;
 		isUiActived = false;
-		isBedCoroutineRunning = false;
+		//isBedCoroutineRunning = false;
 		flag = 0;
 	}
 

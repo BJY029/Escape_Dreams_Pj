@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public Vector2 inputVec;
     public float Speed;
 	private float run;
+	private float flag;
     Rigidbody2D rb;
 	Animator animator;
 	SpriteRenderer spriteRenderer;
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour
     private void Awake()
 	{
 		run = 1.0f;
+		flag = 1.0f;
 		rb = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
@@ -32,11 +34,13 @@ public class Player : MonoBehaviour
 		{
 			//이벤트 시스템 비활성화 = 입력 제한
 			uiSystem.eventSystem.enabled = false;
+			flag = 0.0f; //이동 중에 상호작용 시 오류 방지 위한 추가 플래그
+			animator.Play("Idle_0");//나중에 잠 자는 애니매이션이 추가되면 변경
 			return;
 		}
 
 		uiSystem.eventSystem.enabled = true;
-
+		flag = 1.0f;//다시 속도를 원래대로 적용
 		//키보드로 입력받은 값을 Vector.x값에 저장
 		inputVec.x = Input.GetAxisRaw("Horizontal");
 
@@ -52,6 +56,7 @@ public class Player : MonoBehaviour
 			run = 1.0f;
 			animator.SetBool("run", false);
 		}
+		
 	}
 
 	//함수 호출 간격이 일정하도록 보장하는 update 함수다.
@@ -59,7 +64,8 @@ public class Player : MonoBehaviour
 	private void FixedUpdate()
 	{
 		//플레이어 움직임 구현
-		Vector2 nextVec = inputVec * Speed * run * Time.fixedDeltaTime;
+		//flag는 상호작용시 해당 플레이어의 이동을 멈추기 위함
+		Vector2 nextVec = inputVec * Speed * run * flag * Time.fixedDeltaTime;
 		rb.MovePosition(rb.position + nextVec);
 
 		//플레이어의 이동방향에 맞게 스프라이트가 바라보는 방향 수정

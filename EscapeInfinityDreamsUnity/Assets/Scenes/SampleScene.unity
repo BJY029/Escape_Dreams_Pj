@@ -9021,7 +9021,7 @@ GameObject:
   - component: {fileID: 1480682297}
   - component: {fileID: 1480682298}
   m_Layer: 0
-  m_Name: vent
+  m_Name: vent_origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12542,8 +12542,8 @@ MonoBehaviour:
   - {fileID: 1121519195}
   - {fileID: 647119856}
   - {fileID: 1603355446}
-  - {fileID: 1248640026}
   - {fileID: 643357546}
+  - {fileID: 1480682296}
   originals:
   - {fileID: 1417620416}
   - {fileID: 1417620416}
@@ -12559,7 +12559,6 @@ MonoBehaviour:
   - {fileID: 110520017}
   - {fileID: 1555173414}
   - {fileID: 175034245}
-  - {fileID: 1248640026}
 --- !u!1 &2090549671
 GameObject:
   m_ObjectHideFlags: 0
