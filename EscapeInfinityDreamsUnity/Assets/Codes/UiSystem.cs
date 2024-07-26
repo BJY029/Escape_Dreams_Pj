@@ -30,6 +30,7 @@ public class UiSystem : MonoBehaviour
 
 	public GameObject slotItem; //슬롯아이템 지정, 지금은 콜라 UI
 
+	//중복 키 적용을 막기 위한 플래그 설정
 	public bool isBedCoroutineRunning;
 	public EventSystem eventSystem;
 
@@ -66,9 +67,10 @@ public class UiSystem : MonoBehaviour
 		//상호작용 UI의 위치 설정
 		interactionUI.transform.position = transform.position + uiOffset;
 
+		//침대 코루틴이 실행되고 있는 경우
 		if (isBedCoroutineRunning == true)
 		{
-			eventSystem.enabled = false;
+			eventSystem.enabled = false; //이벤트 시스템을 비활성화 해서 입력을 제한한다.
 			return;
 		}
 
@@ -178,7 +180,7 @@ public class UiSystem : MonoBehaviour
     //잠에 드는 코루틴 호출
     IEnumerator bedRoutine()
 	{
-		isBedCoroutineRunning = true;
+		isBedCoroutineRunning = true; //이벤트 시스템 비활성화를 위한 플래그 설정
 
 		//해당 상호작용 텍스트를 다음과 같이 변경
 		sleepText.text = "잠에 드는 중..";
@@ -193,7 +195,7 @@ public class UiSystem : MonoBehaviour
 
 		yield return lightController.FadeInLight();
 
-		isBedCoroutineRunning = false;
+		isBedCoroutineRunning = false; //이벤트 시스템 다시 사용
 	}
 
 

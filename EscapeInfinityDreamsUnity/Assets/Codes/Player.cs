@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
 	Animator animator;
 	SpriteRenderer spriteRenderer;
 
-	public UiSystem uiSystem;
+	public UiSystem uiSystem; //uisystem에서 코루틴의 실행 정보를 가지고 오기 위한 선언
 
     //시작과 동시에 초기화 하는 목록들
     private void Awake()
@@ -27,8 +27,10 @@ public class Player : MonoBehaviour
 	//프레임마다 작업량이 다르므로 호출 주기가 일정하지 않다.
 	private void Update()
 	{
+		//코루틴이 실행중이면
 		if (uiSystem.isBedCoroutineRunning == true)
 		{
+			//이벤트 시스템 비활성화 = 입력 제한
 			uiSystem.eventSystem.enabled = false;
 			return;
 		}
