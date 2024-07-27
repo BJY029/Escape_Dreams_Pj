@@ -9,6 +9,9 @@ TagManager:
   - vandingMachine
   - bed
   - Ab_extensometer
+  - mainMap
+  - Room_1
+  - Room_0
   layers:
   - Default
   - TransparentFX

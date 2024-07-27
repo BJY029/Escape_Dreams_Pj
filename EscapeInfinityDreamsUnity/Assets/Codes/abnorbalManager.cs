@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering.Universal;
 
 public class abnorbalManager : MonoBehaviour
 {
     public List<GameObject> abnormals; //이상현상용 오브젝트 리스트
     public List<GameObject> originals; //오리지날 오브젝트 리스트
-	
+	public GameObject player;
+
+	public int flag;
+
 	//초기화 함수
 	public void Init()
 	{
+		flag = 0;
+
 		//텍스트 할당
 		Text PaperText = abnormals[17].GetComponent<Text>();
+		Light2D GlobalLight = abnormals[19].GetComponent<Light2D>();
 		//이상현상 오브젝트 리스트을 돌아보며
 		for (int i = 0; i < originals.Count; i++)
 		{
@@ -32,10 +39,13 @@ public class abnorbalManager : MonoBehaviour
 		abnormals[14].SetActive(false) ;	//새로운 밴트 삭제
 		abnormals[15].SetActive(true) ;     //기존 벤트 활성화
 		abnormals[16].SetActive(true);      //포스터 활성화
+		abnormals[18].SetActive(false);      //포스터2 비활성화
 
-		//텍스트 초기화 작업
+		 //텍스트 초기화 작업
 		PaperText.text = "우리 병원은.... 환자들의 건강을 최우선으로 생각합니다.\n우리 병원은.... 최고의 시설을 자랑합니다.\n우리 병원은.... 웃음으로 가득 차 있습니다.";
 		PaperText.color = Color.black;
+
+		GlobalLight.color = Color.white;
 	}
 
 	//다음 스테이지 이동 함수
@@ -83,6 +93,18 @@ public class abnorbalManager : MonoBehaviour
 			PaperText.text = "정신나갈것같아정신나갈것같아정신나갈것같아정신나갈것같아정신나갈것같아정신나갈것같아정신나갈것같아정신나갈것같아정신나갈것같아정신나갈것같아";
 			PaperText.color = Color.red;
 			Debug.Log("Paper Text has been changed");
+		}
+		else if (ranIdx == 18) //포스터들이 바뀌는 현상
+		{
+			abnormals[ranIdx].SetActive(true);
+			Debug.Log("Posters has been actived");
+		}
+		else if (ranIdx == 19) //빛 색 바뀌는 현상
+		{
+			Debug.Log("Lights has been changed");
+			//플래그 설정, 해당 값은 Player 스크립트의 
+			//OnTriggerEnter 2D 에서 사용된다.
+			flag = 19;
 		}
 	}
 }

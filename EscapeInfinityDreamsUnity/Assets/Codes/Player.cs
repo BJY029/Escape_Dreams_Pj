@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering.Universal;
 
 public class Player : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
 	Animator animator;
 	SpriteRenderer spriteRenderer;
+	public abnorbalManager abnorbalManager;
+	public Light2D GlobalLight;
 
 	public UiSystem uiSystem; //uisystem에서 코루틴의 실행 정보를 가지고 오기 위한 선언
 
@@ -80,5 +83,22 @@ public class Player : MonoBehaviour
 	{
 		//애니메이션을 위한 연산
 		animator.SetFloat("Speed", inputVec.magnitude);
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		//flag가 19 일때만 실행(빛 변경 효과)
+		if (abnorbalManager.flag == 19)
+		{
+			//플레이어의 위치가 복도, Room_1 일때만 빛이 변경되도록 설정
+			if (collision.CompareTag("mainMap") || collision.CompareTag("Room_1"))
+			{
+				GlobalLight.color = Color.red;
+			}
+			else if (collision.CompareTag("Room_0"))
+			{
+				GlobalLight.color = Color.white;
+			}
+		}
 	}
 }
