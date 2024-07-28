@@ -105,6 +105,35 @@ public class abnorbalManager : MonoBehaviour
 			//플래그 설정, 해당 값은 Player 스크립트의 
 			//OnTriggerEnter 2D 에서 사용된다.
 			flag = 19;
+			////플래그가 사용된 부분을 수정해야 할 때, Player와 cat 스크립트의 OnTriggerEnter 2D를 수정 해야 함. 
+			///추가로 해당 플래그로 코드 내에서도 구분 짓는 요소가 있을 수 있음
+		}
+		else if (ranIdx == 20) //좌우 반전 컨트롤
+		{
+			Debug.Log("a,d has been changed");
+			//플래그 설정, 해당 값은 Player 스크립트의 
+			//OnTriggerEnter 2D 에서 사용된다.
+			flag = 20;
+		}
+		else if (ranIdx == 21) //플레이어 이동 속도 변화
+		{
+			Debug.Log("speed has been changed");
+			//플래그 설정, 해당 값은 Player 스크립트의 
+			//OnTriggerEnter 2D 에서 사용된다.
+			flag = 21;
+		}
+		else if (ranIdx == 22) //플레이어, 고양이 그림자 삭제
+		{
+			Debug.Log("Shadow deleted");
+			//플래그 설정, 해당 값은 Player 스크립트의 
+			//OnTriggerEnter 2D 에서 사용된다.
+			flag = 22;
+		}
+		else if (ranIdx == 23) //플레이어, 고양이 그림자 삭제
+		{
+			Debug.Log("Change Cat Sprite");
+			//catAnimationController 스크립트에서 참조된다.
+			flag = 23;
 		}
 	}
 }

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Reaper
+  m_Controller: {fileID: 9100000, guid: 31be6356fe18b9b44b27b8364ed45994, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: ed9d5c90edaaeca49a663f305b9f75c5, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 68bfbda45ae24d24b88b0b70cc13e458, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 2d412f9f4a5dc3d4aa2b08ce76ba33a5, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 225139e7121d38e4cb9e3f64b3399287, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 3c8de1fffbb531c4db78d2a05753365e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 53c25fcb4f22b994d96d44269e67c32b, type: 2}

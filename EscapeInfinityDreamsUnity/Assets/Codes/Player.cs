@@ -10,11 +10,14 @@ public class Player : MonoBehaviour
     public float Speed;
 	private float run;
 	private float flag;
+	public float direction;
+	public float acc;
     Rigidbody2D rb;
 	Animator animator;
 	SpriteRenderer spriteRenderer;
 	public abnorbalManager abnorbalManager;
 	public Light2D GlobalLight;
+	private ShadowCaster2D shadowCaster;
 
 	public UiSystem uiSystem; //uisystem에서 코루틴의 실행 정보를 가지고 오기 위한 선언
 
@@ -23,11 +26,18 @@ public class Player : MonoBehaviour
 	{
 		run = 1.0f;
 		flag = 1.0f;
+		direction = 1.0f;
+		acc = 1.0f;
 		rb = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
+		shadowCaster = GetComponent<ShadowCaster2D>();
 	}
 
+	private void Start()
+	{
+		shadowCaster.enabled = true;
+	}
 	//기본적인 update 함수로 매 프레임 호출된다.
 	//프레임마다 작업량이 다르므로 호출 주기가 일정하지 않다.
 	private void Update()
@@ -68,12 +78,20 @@ public class Player : MonoBehaviour
 	{
 		//플레이어 움직임 구현
 		//flag는 상호작용시 해당 플레이어의 이동을 멈추기 위함
-		Vector2 nextVec = inputVec * Speed * run * flag * Time.fixedDeltaTime;
+		Vector2 nextVec = inputVec * Speed * acc * run * flag * direction * Time.fixedDeltaTime;
 		rb.MovePosition(rb.position + nextVec);
 
-		//플레이어의 이동방향에 맞게 스프라이트가 바라보는 방향 수정
-		if (inputVec.x > 0) spriteRenderer.flipX = false;
-		else if (inputVec.x < 0) spriteRenderer.flipX = true;
+		//플레이어의 이동방향ㅁ에 맞게 스프라이트가 바라보는 방향 수정
+		if (direction < 0)	//이동 방향이 반대인 경우, 바라보는 방향도 반대로 설정
+		{
+			if (inputVec.x > 0) spriteRenderer.flipX = true;
+			else if (inputVec.x < 0) spriteRenderer.flipX = false;
+		}
+		else
+		{
+			if (inputVec.x > 0) spriteRenderer.flipX = false;
+			else if (inputVec.x < 0) spriteRenderer.flipX = true;
+		}
 	}
 
 	//Update가 완전히 끝난 후 프레임당 한 번 호출되는 함수다.
@@ -98,6 +116,39 @@ public class Player : MonoBehaviour
 			else if (collision.CompareTag("Room_0"))
 			{
 				GlobalLight.color = Color.white;
+			}
+		}
+		if(abnorbalManager.flag == 20) //좌우 반전인 경우
+		{
+			if (collision.CompareTag("mainMap") || collision.CompareTag("Room_1"))
+			{
+				direction = -1.0f; //해당 맵에서는 방향을 반대로 적용
+			}
+			else if (collision.CompareTag("Room_0"))
+			{
+				direction = 1.0f; //기본 방에서는 이상현상 적용 x
+			}
+		}
+		if (abnorbalManager.flag == 21) //좌우 반전인 경우
+		{
+			if (collision.CompareTag("mainMap") || collision.CompareTag("Room_1"))
+			{
+				acc = 2.0f;
+			}
+			else if (collision.CompareTag("Room_0"))
+			{
+				acc = 1.0f;
+			}
+		}
+		if (abnorbalManager.flag == 22) //그림자 삭제인 경우
+		{
+			if (collision.CompareTag("mainMap") || collision.CompareTag("Room_1"))
+			{
+				shadowCaster.enabled = false;
+			}
+			else if (collision.CompareTag("Room_0"))
+			{
+				shadowCaster.enabled = true;
 			}
 		}
 	}

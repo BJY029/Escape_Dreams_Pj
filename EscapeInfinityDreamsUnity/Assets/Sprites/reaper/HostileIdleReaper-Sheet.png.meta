@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 98f7b2ab72126f044b2da2e5cd2e43af
+guid: 114436ea9c3c13b4a9fe93da16fc88ac
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 30
+  spritePixelsToUnits: 35
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -65,14 +65,14 @@ TextureImporter:
   ignorePngGamma: 0
   applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -93,199 +93,110 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Server
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Cat-2-Run_0
+      name: HostileIdleReaper-Sheet_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 18
-        width: 19
-        height: 15
+        x: 12
+        y: 5
+        width: 32
+        height: 36
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06bf72a5319338343a9e7a6f7a457f91
-      internalID: -1689444797
+      spriteID: 9e74f7933904d0249b5da90a602255e8
+      internalID: -1615116339
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cat-2-Run_1
+      name: HostileIdleReaper-Sheet_1
       rect:
         serializedVersion: 2
         x: 60
-        y: 18
-        width: 21
-        height: 15
+        y: 5
+        width: 31
+        height: 37
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e9e65455618e37428a1a6c04d3111f1
-      internalID: 587833758
+      spriteID: 69d21c52bc5fcdd408815080e366db07
+      internalID: 494225059
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cat-2-Run_2
+      name: HostileIdleReaper-Sheet_2
       rect:
         serializedVersion: 2
-        x: 110
-        y: 20
-        width: 25
-        height: 13
+        x: 108
+        y: 6
+        width: 32
+        height: 37
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77ce9dfb727750949823df23806a973e
-      internalID: -1375625415
+      spriteID: c8fc69bb97a6c0c41a3705c4c9245cfe
+      internalID: 2102810524
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cat-2-Run_3
+      name: HostileIdleReaper-Sheet_3
       rect:
         serializedVersion: 2
-        x: 161
-        y: 20
-        width: 29
-        height: 10
+        x: 155
+        y: 4
+        width: 34
+        height: 39
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 54fa180a12eff4d43985ce0459efa214
-      internalID: -1021212030
+      spriteID: 5eb6818329fe8e448a7509d0c1c033f9
+      internalID: -2070279505
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cat-2-Run_4
+      name: HostileIdleReaper-Sheet_4
       rect:
         serializedVersion: 2
-        x: 213
-        y: 18
-        width: 27
-        height: 12
+        x: 203
+        y: 4
+        width: 34
+        height: 40
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b115402e69e3d441946043de8081291
-      internalID: -1550280241
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Cat-2-Run_5
-      rect:
-        serializedVersion: 2
-        x: 265
-        y: 18
-        width: 21
-        height: 12
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 192c96ffd0c86f8468dcf2cde23e2c39
-      internalID: -719394768
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Cat-2-Run_6
-      rect:
-        serializedVersion: 2
-        x: 314
-        y: 18
-        width: 18
-        height: 12
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c39dbc4719cc9344281302c48365b611
-      internalID: -659371257
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Cat-2-Run_7
-      rect:
-        serializedVersion: 2
-        x: 362
-        y: 18
-        width: 15
-        height: 12
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bd8c27e51009b3543a453a33692756fb
-      internalID: -1653465737
+      spriteID: 76944beb408dddc46a1340315be9f2d7
+      internalID: -1585428828
       vertices: []
       indices: 
       edges: []
@@ -301,14 +212,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Cat-2-Run_0: -1689444797
-      Cat-2-Run_1: 587833758
-      Cat-2-Run_2: -1375625415
-      Cat-2-Run_3: -1021212030
-      Cat-2-Run_4: -1550280241
-      Cat-2-Run_5: -719394768
-      Cat-2-Run_6: -659371257
-      Cat-2-Run_7: -1653465737
+      HostileIdleReaper-Sheet_0: -1615116339
+      HostileIdleReaper-Sheet_1: 494225059
+      HostileIdleReaper-Sheet_2: 2102810524
+      HostileIdleReaper-Sheet_3: -2070279505
+      HostileIdleReaper-Sheet_4: -1585428828
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
