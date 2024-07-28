@@ -105,8 +105,8 @@ public class Player : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		//flag가 19 일때만 실행(빛 변경 효과)
-		if (abnorbalManager.flag == 19)
+		//flag가 22 일때만 실행(빛 변경 효과)
+		if (abnorbalManager.flag == 22)
 		{
 			//플레이어의 위치가 복도, Room_1 일때만 빛이 변경되도록 설정
 			if (collision.CompareTag("mainMap") || collision.CompareTag("Room_1"))
@@ -118,7 +118,7 @@ public class Player : MonoBehaviour
 				GlobalLight.color = Color.white;
 			}
 		}
-		if(abnorbalManager.flag == 20) //좌우 반전인 경우
+		if(abnorbalManager.flag == 23) //좌우 반전인 경우
 		{
 			if (collision.CompareTag("mainMap") || collision.CompareTag("Room_1"))
 			{
@@ -129,7 +129,7 @@ public class Player : MonoBehaviour
 				direction = 1.0f; //기본 방에서는 이상현상 적용 x
 			}
 		}
-		if (abnorbalManager.flag == 21) //좌우 반전인 경우
+		if (abnorbalManager.flag == 24) //좌우 반전인 경우
 		{
 			if (collision.CompareTag("mainMap") || collision.CompareTag("Room_1"))
 			{
@@ -140,7 +140,7 @@ public class Player : MonoBehaviour
 				acc = 1.0f;
 			}
 		}
-		if (abnorbalManager.flag == 22) //그림자 삭제인 경우
+		if (abnorbalManager.flag == 25) //그림자 삭제인 경우
 		{
 			if (collision.CompareTag("mainMap") || collision.CompareTag("Room_1"))
 			{
