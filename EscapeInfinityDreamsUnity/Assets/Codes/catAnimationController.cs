@@ -28,7 +28,7 @@ public class catAnimationController : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (manager.flag == 26) //만약 해당 플래그가 발동 시
+		if (manager.flag == 27) //만약 해당 플래그가 발동 시
 		{
 			if (collision.CompareTag("mainMap") || collision.CompareTag("Room_1"))
 			{
