@@ -6,6 +6,10 @@ public class GameManager : MonoBehaviour
 {
 	public static GameManager Instance;
 	public GameObject player;
+	public abnorbalManager abnorbalManager;
+	public AudioController audioController;
+	public Player playerController;
+
 	private void Awake()
 	{
 		Instance = this;

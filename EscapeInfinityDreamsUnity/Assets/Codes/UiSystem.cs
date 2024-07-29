@@ -195,6 +195,8 @@ public class UiSystem : MonoBehaviour
 
 		yield return lightController.FadeInLight();
 
+		GameManager.Instance.playerController.init(); //Window 효과음을 한번만 재생하기 위해 초기화 함수 호출
+
 		isBedCoroutineRunning = false; //이벤트 시스템 다시 사용
 	}
 

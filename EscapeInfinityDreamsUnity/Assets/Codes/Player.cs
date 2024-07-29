@@ -18,12 +18,16 @@ public class Player : MonoBehaviour
 	public abnorbalManager abnorbalManager;
 	public Light2D GlobalLight;
 	private ShadowCaster2D shadowCaster;
+	public int cnt;
+
+	public float waitTime = 1.0f;
 
 	public UiSystem uiSystem; //uisystem에서 코루틴의 실행 정보를 가지고 오기 위한 선언
 
     //시작과 동시에 초기화 하는 목록들
     private void Awake()
 	{
+		cnt = 0;
 		run = 1.0f;
 		flag = 1.0f;
 		direction = 1.0f;
@@ -32,6 +36,12 @@ public class Player : MonoBehaviour
 		animator = GetComponent<Animator>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		shadowCaster = GetComponent<ShadowCaster2D>();
+	}
+
+	//창문 오디오를 한번만 재생하기 위해 cnt를 0으로 초기화 하는 함수
+	public void init()
+	{
+		cnt = 0;
 	}
 
 	private void Start()
@@ -150,6 +160,21 @@ public class Player : MonoBehaviour
 			{
 				shadowCaster.enabled = true;
 			}
+		}
+		if (abnorbalManager.flag == 28) //창문 오디오 이상현상
+		{
+			if (collision.CompareTag("Window") && cnt == 0)
+			{
+				StartCoroutine(PlayWindowKnock());
+				cnt = 1;
+			}
+		}
+
+		//창문 효과음을 일정 시간 이후에 출력하도록 하는 코루틴
+		IEnumerator PlayWindowKnock()
+		{
+			yield return new WaitForSeconds(waitTime);
+			GameManager.Instance.audioController.PlayWindoeKnocking();
 		}
 	}
 }

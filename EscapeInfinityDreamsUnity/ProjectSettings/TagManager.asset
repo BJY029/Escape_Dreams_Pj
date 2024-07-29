@@ -12,6 +12,8 @@ TagManager:
   - mainMap
   - Room_1
   - Room_0
+  - Window
+  - door_2
   layers:
   - Default
   - TransparentFX
