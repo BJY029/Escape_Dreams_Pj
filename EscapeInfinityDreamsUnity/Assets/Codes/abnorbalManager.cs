@@ -80,12 +80,12 @@ public class abnorbalManager : MonoBehaviour
 			abnormals[ranIdx].SetActive(true);
 			Debug.Log("New Vent has been actived");
 		}
-		else if (ranIdx == 16) //사물함 위 새로운 벤트 생성 현상
+		else if (ranIdx == 16) //자판기 위 벤트 비활성화
 		{
 			abnormals[ranIdx].SetActive(false);
 			Debug.Log("Vent has been unactived");
 		}
-		else if (ranIdx == 17) //사물함 위 새로운 벤트 생성 현상
+		else if (ranIdx == 17) //벽에 포스터 비활성화 현상
 		{
 			abnormals[ranIdx].SetActive(false);
 			Debug.Log("Posters has been unactived");
@@ -147,7 +147,7 @@ public class abnorbalManager : MonoBehaviour
 			//OnTriggerEnter 2D 에서 사용된다.
 			flag = 26;
 		}
-		else if (ranIdx == 27) //플레이어, 고양이 그림자 삭제
+		else if (ranIdx == 27) //고양이 스프라이트 변경 현상
 		{
 			Debug.Log("Change Cat Sprite");
 			//catAnimationController 스크립트에서 참조된다.
