@@ -182,6 +182,9 @@ public class UiSystem : MonoBehaviour
 	{
 		isBedCoroutineRunning = true; //이벤트 시스템 비활성화를 위한 플래그 설정
 
+		//재생중인 모든 효과음 중지
+		GameManager.Instance.audioController.StopPlayAudio();
+
 		//해당 상호작용 텍스트를 다음과 같이 변경
 		sleepText.text = "잠에 드는 중..";
 

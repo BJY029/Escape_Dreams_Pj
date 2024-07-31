@@ -60,7 +60,7 @@ public class abnorbalManager : MonoBehaviour
 		//랜덤 인덱스 생성
 		int ranIdx = Random.Range(0, abnormals.Count);
 
-		//int ranIdx = 29; //이상현상 정상 작동 테스트 용
+		//int ranIdx = 30; //이상현상 정상 작동 테스트 용
 
 		//오류 방지 코드
 		if (abnormals[ranIdx] == null)
@@ -166,6 +166,12 @@ public class abnorbalManager : MonoBehaviour
 			Debug.Log("Door Audio Play");
 			//AudioController에서 참조된다.
 			flag = 29;
+		}
+		else if (ranIdx == 30) //우는 소리 재생
+		{
+			Debug.Log("cry Audio Play");
+			//AudioController에서 참조된다.
+			flag = 30;
 		}
 	}
 }

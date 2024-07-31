@@ -70,7 +70,18 @@ public class Teleport : MonoBehaviour
                     GameManager.Instance.playerController.cnt += 1;
 				}
             }
-            else
+			if (GameManager.Instance.abnorbalManager.flag == 30 && myCollider.CompareTag("door_2"))
+			{
+				//상호 작용 할 때 마다 문이 잠긴 효과음을 출력하고
+				GameManager.Instance.audioController.PlayDoorLocked();
+				//문을 쾅쾅 거리는 효과음을 한번만 재생한다.
+				if (GameManager.Instance.playerController.cnt == 0)
+				{
+					StartCoroutine(PlayWomanCry());
+					GameManager.Instance.playerController.cnt += 1;
+				}
+			}
+			else
             {
 				//문 효과음 재생 함수 호출
 				GameManager.Instance.audioController.PlayDoorOpenSound();
@@ -123,4 +134,12 @@ public class Teleport : MonoBehaviour
         //효과음 재생
         GameManager.Instance.audioController.PlayDoorKnocking();
     }
+
+	IEnumerator PlayWomanCry()
+	{
+		//해당 시간동안 대기 후
+		yield return new WaitForSeconds(waitTime);
+		//효과음 재생
+		GameManager.Instance.audioController.PlayCryAudio();
+	}
 }
