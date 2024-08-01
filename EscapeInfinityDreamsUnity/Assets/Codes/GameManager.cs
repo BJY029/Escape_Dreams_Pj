@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 	public abnorbalManager abnorbalManager;
 	public AudioController audioController;
 	public Player playerController;
-
+	public LightController lightController;
 	private void Awake()
 	{
 		Instance = this;

@@ -34,6 +34,9 @@ public class UiSystem : MonoBehaviour
 	public bool isBedCoroutineRunning = false;
 	public EventSystem eventSystem;
 
+	//애니메이션
+	Animator animator;
+
     //초기화
     public void Awake()
 	{
@@ -50,7 +53,9 @@ public class UiSystem : MonoBehaviour
 		VandingMachine.SetActive(false);
 		Extensonmeter.SetActive(false);
         Ab_Extensonmeter.SetActive(false);
+		animator = GetComponent<Animator>();
 
+		animator.SetBool("IsAlive", true);
         sleepText.text ="E키로 상호작용";
 
 		isInteracted = false;
@@ -58,6 +63,7 @@ public class UiSystem : MonoBehaviour
 		//isBedCoroutineRunning = false;
 		flag = 0;
 	}
+
 
 
     private void Update()

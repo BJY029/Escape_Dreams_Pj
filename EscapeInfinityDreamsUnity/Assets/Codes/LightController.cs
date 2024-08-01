@@ -7,19 +7,32 @@ public class LightController : MonoBehaviour
 {
     public Light2D GlobalLight; //맵 전체의 빛을 총괄하는 GlobalLight
     public Light2D RoomLight; //Room0의 빛을 담당하는 빛 오브젝트
+    public Light2D PlayerLight; //플레이어 개인 빛
+    public Light2D[] AllLights; //모든 빛 오브젝트
     public float fadeDuration = 1.0f; //빛이 꺼지거나 켜지는 시간
+	public float AllLightOutDuration = 2.0f; //빛이 꺼지거나 켜지는 시간
 
-    //변하는 조명에 맞게 각 스프라이트의 색상 변경을 위한 선언
-    public SpriteRenderer Player;
+	//변하는 조명에 맞게 각 스프라이트의 색상 변경을 위한 선언
+	public SpriteRenderer Player;
     public SpriteRenderer Cat;
 	public Color targetColor = Color.white;
+
+    //각 빛의 초기화 값
     private float GlobalLightIntensity;
     private float RoomLightIntensity;
+	private float[] LightsInit; //모든 빛들을 포함한 리스트(GlobalLight 제외)
 
 	private void Awake()
 	{
 		GlobalLightIntensity = GlobalLight.intensity;
         RoomLightIntensity = RoomLight.intensity;
+
+        //모든 빛들의 초기화 값을 입력받기 위한 선언 및 대입
+        LightsInit = new float[AllLights.Length];
+        for(int i = 0; i < AllLights.Length; i++)
+        {
+            LightsInit[i] = AllLights[i].intensity;
+        }
 	}
 
 
@@ -103,4 +116,50 @@ public class LightController : MonoBehaviour
 		Player.color = finalColor;
 		Cat.color = finalColor;
 	}
+
+    //플레이어 사망시 재생되는 빛 효과
+	public IEnumerator DeadLightOut()
+	{
+        float elapsedTime = 0f; //기준 시간 초기화
+        float GInitialIntensity = GlobalLightIntensity; //GlobalLight 초기화 값
+        float targetIntensity = 0f; //목표 값
+        float PlayerLightIntensity = 0f; //플레이어 개인 빛 초기화 값
+        float PlayerLightTarget = RoomLightIntensity; //목표 값
+
+        //설정한 시간동안
+        while(elapsedTime < AllLightOutDuration)
+        {
+            //각 빛들의 값을 LERP을 통해 서서히 변화
+			GlobalLight.intensity = Mathf.Lerp(GInitialIntensity, targetIntensity, elapsedTime / fadeDuration);
+            for(int i = 0; i < AllLights.Length; i++)
+            {
+                AllLights[i].intensity = Mathf.Lerp(LightsInit[i], targetIntensity, elapsedTime / fadeDuration);
+            }
+            PlayerLight.intensity = Mathf.Lerp(PlayerLightIntensity, PlayerLightTarget, elapsedTime / fadeDuration);
+
+			elapsedTime += Time.deltaTime;
+			yield return null;
+		}
+
+        //최총 값 설정
+        GlobalLight.intensity = targetIntensity;
+		for (int i = 0; i < AllLights.Length; i++)
+		{
+            AllLights[i].intensity = 0f;
+		}
+        PlayerLight.intensity = PlayerLightTarget;
+	}
+
+    //모든 빛의 값들을 처음 상태로 되돌리는 코루틴
+    public IEnumerator InitAllLights()
+    {
+        for(int i = 0; i < AllLights.Length; i++)
+        {
+            AllLights[i].intensity = LightsInit[i];
+        }
+        PlayerLight.intensity = 0f;
+        GlobalLight.intensity = GlobalLightIntensity;
+
+        yield return null;
+    }
 }

@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
 	public abnorbalManager abnorbalManager;
 	public Light2D GlobalLight;
 	private ShadowCaster2D shadowCaster;
+	private BoxCollider2D boxCollider;
 	public int cnt;
 
 	public float waitTime = 1.0f;
@@ -36,6 +37,7 @@ public class Player : MonoBehaviour
 		animator = GetComponent<Animator>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		shadowCaster = GetComponent<ShadowCaster2D>();
+		boxCollider = GetComponent<BoxCollider2D>();
 	}
 
 	//창문 오디오를 한번만 재생하기 위해 cnt를 0으로 초기화 하는 함수
@@ -52,6 +54,7 @@ public class Player : MonoBehaviour
 	//프레임마다 작업량이 다르므로 호출 주기가 일정하지 않다.
 	private void Update()
 	{
+		UpdateColliderSize();
 		//코루틴이 실행중이면
 		if (uiSystem.isBedCoroutineRunning == true)
 		{
@@ -175,6 +178,19 @@ public class Player : MonoBehaviour
 		{
 			yield return new WaitForSeconds(waitTime);
 			GameManager.Instance.audioController.PlayWindoeKnocking();
+		}
+	}
+
+	void UpdateColliderSize()
+	{
+		if (spriteRenderer != null && boxCollider != null)
+		{
+			//bounds.size = 경계 상자의 전체 크기를 나타내는 Vector3. max - min의 값과 같다.
+			//콜라이더의 크기를 스프라이트 크기로 변경한다.
+			boxCollider.size = spriteRenderer.bounds.size;
+			//bounds.center = 경계 상자의 중심 위치를 나타내는 Vector3
+			//콜라이더의 위치를 변경한다.
+			boxCollider.offset = spriteRenderer.bounds.center - transform.position;
 		}
 	}
 }
