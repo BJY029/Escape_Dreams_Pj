@@ -13,6 +13,7 @@ public class UiSystem : MonoBehaviour
     public GameObject Ab_VandingMachine; //이상현상 자판기 UI
     public GameObject Extensonmeter; //신장계 UI
     public GameObject Ab_Extensonmeter; //신장계 이상현상 UI
+	public GameObject DeadStateUi;
 
     [Header("# UI Set")]
 	public GameObject interactionUI; // 배경을 포함한 UI 오브젝트(text_background)
@@ -56,6 +57,7 @@ public class UiSystem : MonoBehaviour
         Ab_VandingMachine.SetActive(false);
         Extensonmeter.SetActive(false);
         Ab_Extensonmeter.SetActive(false);
+		DeadStateUi.SetActive(false);
 		animator = GetComponent<Animator>();
 
 		animator.SetBool("IsAlive", true);
@@ -77,7 +79,7 @@ public class UiSystem : MonoBehaviour
 		interactionUI.transform.position = transform.position + uiOffset;
 
 		//침대 코루틴이 실행되고 있는 경우
-		if (isBedCoroutineRunning == true)
+		if (isBedCoroutineRunning == true || GameManager.Instance.playerAnimationController.playerDeadCoroutine == true)
 		{
 			eventSystem.enabled = false; //이벤트 시스템을 비활성화 해서 입력을 제한한다.
 			return;

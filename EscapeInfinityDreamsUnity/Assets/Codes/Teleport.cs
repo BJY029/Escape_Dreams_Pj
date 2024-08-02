@@ -53,23 +53,25 @@ public class Teleport : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        // 키 입력을 처리하여 텔레포트를 시작
-        if (canTeleport && !isTeleporting && Input.GetKeyDown(KeyCode.E))
-        {
-            //만약 이상현상에 해당되고, 자기 자신의 collder가 door_2이면
-            if(GameManager.Instance.abnorbalManager.flag == 29 && myCollider.CompareTag("door_2"))
-            {
-                //상호 작용 할 때 마다 문이 잠긴 효과음을 출력하고
-                GameManager.Instance.audioController.PlayDoorLocked();
-                //문을 쾅쾅 거리는 효과음을 한번만 재생한다.
-                if (GameManager.Instance.playerController.cnt == 0)
-                {
-                    StartCoroutine(PlayDoorBoom());
-                    GameManager.Instance.playerController.cnt += 1;
+	private void Update()
+	{
+		if (GameManager.Instance.playerAnimationController.playerDeadCoroutine == true) return;
+
+		// 키 입력을 처리하여 텔레포트를 시작
+		if (canTeleport && !isTeleporting && Input.GetKeyDown(KeyCode.E))
+		{
+			//만약 이상현상에 해당되고, 자기 자신의 collder가 door_2이면
+			if (GameManager.Instance.abnorbalManager.flag == 29 && myCollider.CompareTag("door_2"))
+			{
+				//상호 작용 할 때 마다 문이 잠긴 효과음을 출력하고
+				GameManager.Instance.audioController.PlayDoorLocked();
+				//문을 쾅쾅 거리는 효과음을 한번만 재생한다.
+				if (GameManager.Instance.playerController.cnt == 0)
+				{
+					StartCoroutine(PlayDoorBoom());
+					GameManager.Instance.playerController.cnt += 1;
 				}
-            }
+			}
 			if (GameManager.Instance.abnorbalManager.flag == 30 && myCollider.CompareTag("door_2"))
 			{
 				//상호 작용 할 때 마다 문이 잠긴 효과음을 출력하고
@@ -82,20 +84,20 @@ public class Teleport : MonoBehaviour
 				}
 			}
 			else
-            {
+			{
 				//문 효과음 재생 함수 호출
 				GameManager.Instance.audioController.PlayDoorOpenSound();
 				StartCoroutine(TeleportRoutine());//텔레포트를 시작
 			}
-        }
-        // 플레이어 기준으로 UI 위치 업데이트
-        if (canTeleport)
-        {
-            interactionUI.transform.position = targetObj.transform.position + uiOffset;
-        }
-    }
+		}
+		// 플레이어 기준으로 UI 위치 업데이트
+		if (canTeleport)
+		{
+			interactionUI.transform.position = targetObj.transform.position + uiOffset;
+		}
+	}
 
-    IEnumerator TeleportRoutine()
+	IEnumerator TeleportRoutine()
     {
         isTeleporting = true; // 텔레포트 시작
 

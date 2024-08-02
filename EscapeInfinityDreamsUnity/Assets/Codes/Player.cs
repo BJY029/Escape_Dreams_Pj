@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     public Vector2 inputVec;
     public float Speed;
 	private float run;
-	private float flag;
+	public float flag;
 	public float direction;
 	public float acc;
     Rigidbody2D rb;
@@ -60,14 +60,21 @@ public class Player : MonoBehaviour
 		{
 			//이벤트 시스템 비활성화 = 입력 제한
 			uiSystem.eventSystem.enabled = false;
-			flag = 0.0f; //이동 중에 상호작용 시 오류 방지 위한 추가 플래그
+			flag = 0; //이동 중에 상호작용 시 오류 방지 위한 추가 플래그
 			animator.Play("Idle_0");//나중에 잠 자는 애니매이션이 추가되면 변경
+			return;
+		}
+
+		//만약 플레이어가 사망했다면, 해당 입력키 제한
+		if (GameManager.Instance.playerAnimationController.playerDeadCoroutine == true)
+		{
+			uiSystem.eventSystem.enabled = false;
 			return;
 		}
 
 		uiSystem.eventSystem.enabled = true;
 		flag = 1.0f;//다시 속도를 원래대로 적용
-		//키보드로 입력받은 값을 Vector.x값에 저장
+					//키보드로 입력받은 값을 Vector.x값에 저장
 		inputVec.x = Input.GetAxisRaw("Horizontal");
 
 		//달리기 키가 눌리면 run 값을 2로 설정
@@ -82,7 +89,7 @@ public class Player : MonoBehaviour
 			run = 1.0f;
 			animator.SetBool("run", false);
 		}
-		
+
 	}
 
 	//함수 호출 간격이 일정하도록 보장하는 update 함수다.

@@ -150,16 +150,54 @@ public class LightController : MonoBehaviour
         PlayerLight.intensity = PlayerLightTarget;
 	}
 
-    //모든 빛의 값들을 처음 상태로 되돌리는 코루틴
-    public IEnumerator InitAllLights()
-    {
-        for(int i = 0; i < AllLights.Length; i++)
-        {
-            AllLights[i].intensity = LightsInit[i];
-        }
-        PlayerLight.intensity = 0f;
-        GlobalLight.intensity = GlobalLightIntensity;
+	public IEnumerator InitAllLights()
+	{
+		float elapsedTime = 0f;
+		float initialValue = 0f;
 
-        yield return null;
-    }
+		PlayerLight.intensity = 0f;
+
+		//처음 색상(검은색)
+		Color initialColor = Color.black;
+		//목표 색상(흰색)
+		Color finalColor = targetColor;
+
+		//빛 값 초기화
+		GlobalLight.intensity = initialValue;
+		for (int i = 0; i < AllLights.Length; i++)
+		{
+			AllLights[i].intensity = initialValue;
+		}
+
+		//각 스프라이트 색상 초기화
+		Player.color = initialColor;
+		Cat.color = initialColor;
+
+		while (elapsedTime < AllLightOutDuration)
+		{
+			GlobalLight.intensity = Mathf.Lerp(initialValue, GlobalLightIntensity, elapsedTime / fadeDuration);
+			for (int i = 0; i < AllLights.Length; i++)
+			{
+				AllLights[i].intensity = Mathf.Lerp(initialValue, LightsInit[i], elapsedTime / fadeDuration);
+			}
+
+			//각 스프라이트의 값을 업데이트
+			Player.color = Color.Lerp(initialColor, finalColor, elapsedTime / fadeDuration);
+			Cat.color = Color.Lerp(initialColor, finalColor, elapsedTime / fadeDuration);
+
+			elapsedTime += Time.deltaTime;
+			yield return null;
+		}
+
+		//설정된 시간이 되면 각 빛을 목표 값으로 설정
+		GlobalLight.intensity = GlobalLightIntensity;
+		for (int i = 0; i < AllLights.Length; i++)
+		{
+			AllLights[i].intensity = LightsInit[i];
+		}
+
+		//설정된 시간이 되면 각 스프라이트 색상을 목표 값으로 최종 설정
+		Player.color = finalColor;
+		Cat.color = finalColor;
+	}
 }
