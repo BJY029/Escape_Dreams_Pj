@@ -10,7 +10,8 @@ public class UiSystem : MonoBehaviour
 	[Header("# triggerTagObj")]
 	public GameObject Paper;	//종이 UI
 	public GameObject VandingMachine; //자판기 UI
-	public GameObject Extensonmeter; //신장계 UI
+    public GameObject Ab_VandingMachine; //이상현상 자판기 UI
+    public GameObject Extensonmeter; //신장계 UI
     public GameObject Ab_Extensonmeter; //신장계 이상현상 UI
 
     [Header("# UI Set")]
@@ -29,9 +30,10 @@ public class UiSystem : MonoBehaviour
 	public TextMeshProUGUI sleepText; //잠에 들 때, 상호작용 UI의 텍스트 내용을 변경하기 위해 불러온다.
 
 	public GameObject slotItem; //슬롯아이템 지정, 지금은 콜라 UI
+    public GameObject Ab_slotItem; //슬롯아이템 지정, 지금은 정체불명의 액체 UI
 
-	//중복 키 적용을 막기 위한 플래그 설정
-	public bool isBedCoroutineRunning = false;
+    //중복 키 적용을 막기 위한 플래그 설정
+    public bool isBedCoroutineRunning = false;
 	public EventSystem eventSystem;
 
 	//애니메이션
@@ -51,7 +53,8 @@ public class UiSystem : MonoBehaviour
 
 		Paper.SetActive(false);
 		VandingMachine.SetActive(false);
-		Extensonmeter.SetActive(false);
+        Ab_VandingMachine.SetActive(false);
+        Extensonmeter.SetActive(false);
         Ab_Extensonmeter.SetActive(false);
 		animator = GetComponent<Animator>();
 
@@ -128,6 +131,21 @@ public class UiSystem : MonoBehaviour
                     //신장계 이상현상 UI를 활성화 시키는 코루틴 호출
                     StartCoroutine(Ab_extRoutine());
                     break;
+                case 7:
+                    //자판기 UI를 활성화 시키는 코루틴 호출
+                    StartCoroutine(Ab_VandingRoutine());
+                    //인벤토리에 콜라 획득
+                    inven = GetComponent<Inventory>();
+                    for (int i = 0; i < inven.slots.Count; i++)
+                    {
+                        if (inven.slots[i].isEmpty)
+                        {
+                            Instantiate(Ab_slotItem, inven.slots[i].slotObj.transform, false);
+                            inven.slots[i].isEmpty = false;
+                            break;
+                        }
+                    }
+                    break;
                 default:
 					break;
 			}
@@ -167,8 +185,15 @@ public class UiSystem : MonoBehaviour
 		VandingMachine.SetActive(false ); //비활성화
 	}
 
-	//신장계 UI를 일정시간 동아 활성화 시키는 코루틴
-	IEnumerator extRoutine()
+    IEnumerator Ab_VandingRoutine() //이상현상 자판기 UI를 일정시간 동안 활성화 시키는 코루틴
+    {
+        Ab_VandingMachine.SetActive(true); //해당 UI를 활성화
+        yield return new WaitForSeconds(displayDuration); //설정한 시간만큼 대기
+        Ab_VandingMachine.SetActive(false); //비활성화
+    }
+
+    //신장계 UI를 일정시간 동아 활성화 시키는 코루틴
+    IEnumerator extRoutine()
 	{
 		Extensonmeter.SetActive(true); //해당 UI를 활성화
 		yield return new WaitForSeconds(displayDuration); //설정한 시간만큼 대기
@@ -237,6 +262,11 @@ public class UiSystem : MonoBehaviour
         {
             //함수 호출(flag : 6로 설정)
             ShowUIInteraction(6);
+        }
+        else if (collision.CompareTag("Ab_vandingMachine")) //충돌한 콜라이더의 태그가 이상현상 자판기
+        {
+            //함수 호출(flag : 7로 설정)
+            ShowUIInteraction(7);
         }
     }
 

@@ -65,7 +65,7 @@ public class cat : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (abnorbalManager.flag == 26) //그림자 삭제인 경우
+		if (abnorbalManager.flag == 27) //그림자 삭제인 경우
 		{
 			if (collision.CompareTag("mainMap") || collision.CompareTag("Room_1"))
 			{

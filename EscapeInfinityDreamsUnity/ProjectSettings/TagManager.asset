@@ -14,6 +14,7 @@ TagManager:
   - Room_0
   - Window
   - door_2
+  - Ab_vandingMachine
   layers:
   - Default
   - TransparentFX
