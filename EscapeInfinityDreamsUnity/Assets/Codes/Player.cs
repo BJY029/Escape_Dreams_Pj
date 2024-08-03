@@ -46,6 +46,15 @@ public class Player : MonoBehaviour
 		cnt = 0;
 	}
 
+	public void InitAll()
+	{
+		GlobalLight.color = Color.white;
+		direction = 1.0f;
+		acc = 1.0f;
+		shadowCaster.enabled = true;
+
+	}
+
 	private void Start()
 	{
 		shadowCaster.enabled = true;
@@ -149,7 +158,7 @@ public class Player : MonoBehaviour
 				direction = 1.0f; //기본 방에서는 이상현상 적용 x
 			}
 		}
-		if (abnorbalManager.flag == 26) //좌우 반전인 경우
+		if (abnorbalManager.flag == 26) //스피드 변경
 		{
 			if (collision.CompareTag("mainMap") || collision.CompareTag("Room_1"))
 			{
@@ -179,13 +188,13 @@ public class Player : MonoBehaviour
 				cnt = 1;
 			}
 		}
+	}
 
-		//창문 효과음을 일정 시간 이후에 출력하도록 하는 코루틴
-		IEnumerator PlayWindowKnock()
-		{
-			yield return new WaitForSeconds(waitTime);
-			GameManager.Instance.audioController.PlayWindoeKnocking();
-		}
+	//창문 효과음을 일정 시간 이후에 출력하도록 하는 코루틴
+	IEnumerator PlayWindowKnock()
+	{
+		yield return new WaitForSeconds(waitTime);
+		GameManager.Instance.audioController.PlayWindoeKnocking();
 	}
 
 	void UpdateColliderSize()

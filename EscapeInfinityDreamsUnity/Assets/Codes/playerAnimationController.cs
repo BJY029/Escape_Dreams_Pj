@@ -32,8 +32,8 @@ public class playerAnimationController : MonoBehaviour
 		//(임시) X키가 눌리면 플레이어는 사망한다.
 		if (Input.GetKeyDown(KeyCode.X))
 		{
-			//만약에 침대와 상호 중이면, 사망 키 발동은 제한하는 조건문
-			if (GameManager.Instance.uiSystem.isBedCoroutineRunning == true) return;
+			//만약에 침대와 상호 중이면, 사망 키 발동은 제한하는 조건문, 추가로 종이 UI와 상호작용 중일때도 발동을 제한한다.
+			if (GameManager.Instance.uiSystem.isBedCoroutineRunning == true || GameManager.Instance.uiSystem.isPaperisVisualable == true) return;
 
 			if (animator.GetBool("IsAlive") == true)
 			{
@@ -82,6 +82,21 @@ public class playerAnimationController : MonoBehaviour
 		//리스폰 위치로 플레이어와 고양이 이동
 		GameManager.Instance.player.transform.position = PlayerRespawnLocation.transform.position;
 		GameManager.Instance.cat.transform.position = CatRespawnLocation.transform.position;
+
+		//만약 이상현상이 발생하지 않은 상태에서 자살을 택하면, 레벨을 상승하고, 다음 단계로 진행한다.
+		if (GameManager.Instance.isAbnormal == false)
+		{
+			if (GameManager.level != 0) //레벨 0일때 자살을 시도하면 다음 단계로 넘어갈 수 없다.
+			{
+				GameManager.level += 1;
+				GameManager.Instance.abnorbalManager.nextStage();
+			}
+		}
+		else//이상 현상이 발생했는데, 자살을 택하면, 실패로 판정, 레벨을 초기화한다.
+		{
+			GameManager.level = 0;
+			GameManager.Instance.abnorbalManager.Init();
+		}
 
 		//리스폰 관련 UI 비활성화
 		GameManager.Instance.uiSystem.DeadStateUi.SetActive(false);

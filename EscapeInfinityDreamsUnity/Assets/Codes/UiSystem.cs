@@ -35,6 +35,7 @@ public class UiSystem : MonoBehaviour
 
     //중복 키 적용을 막기 위한 플래그 설정
     public bool isBedCoroutineRunning = false;
+	public bool isPaperisVisualable = false;
 	public EventSystem eventSystem;
 
 	//애니메이션
@@ -157,6 +158,7 @@ public class UiSystem : MonoBehaviour
 	//종이 UI를 활성화 시키는 코루틴
 	IEnumerator PaperInRoutine()
 	{
+		isPaperisVisualable = true; //해당 코루틴 활성화 되는 중에 자살 방지를 위한 플래그 설정
 		isUiActived = true; //종이 UI가 활성화 되었음을 선언
 		Paper.SetActive(true);	//종이 UI 활성화
 		interactionUI.SetActive(false); //상호작용 UI는 비활성화
@@ -177,6 +179,7 @@ public class UiSystem : MonoBehaviour
 		yield return new WaitForEndOfFrame();	//한프레임 대기
 		
 		Time.timeScale = 1.0f; //시간 다시 흐르도록 설정
+		isPaperisVisualable = false;//해당 코루틴 활성화 되는 중에 자살 방지를 위한 플래그 설정
 	}
 
 	//자판기 UI를 일정시간 동안 활성화 시키는 코루틴
@@ -220,6 +223,18 @@ public class UiSystem : MonoBehaviour
 
 		//해당 상호작용 텍스트를 다음과 같이 변경
 		sleepText.text = "잠에 드는 중..";
+
+		//만약 이상현상이 발생한 상태에서 침대와 상호작용 하면 레벨을 상승시킨다.
+		//추가로 현재 레벨이 0인 상태에서는 이상현상이 발생하지 않아도 다음 단계로 진행해야 하므로, 추가로 조건을 설정한다.
+		if (GameManager.Instance.isAbnormal == true || GameManager.Instance.isAbnormal == false && GameManager.level == 0)
+		{
+			GameManager.level += 1;
+		}
+		else //이상현상이 발생하지 않았는데, 침대와 상호작용하면 실패, 레벨을 초기화한다.
+		{
+			GameManager.level = 0;
+			GameManager.Instance.abnorbalManager.Init();
+		}
 
 		//LightController의 FadeOutLight() 코루틴 호출
 		yield return lightController.FadeOutLight();
