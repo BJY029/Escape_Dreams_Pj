@@ -35,12 +35,15 @@ public class Teleport : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)//문과 충돌 감지
     {
-        if (collision.CompareTag("Player"))//부딪힌 대상이 플레이어인지 확인
-        {
-            targetObj = collision.gameObject;//플레이어의 게임 오브젝트를 받음
-            canTeleport = true; // 텔레포트 가능 여부 설정
-            interactionUI.SetActive(true); // 텍스트를 보이게 함
-        }
+		if (GameManager.Instance.playerAnimationController.playerDeadCoroutine == false)
+		{
+			if (collision.CompareTag("Player"))//부딪힌 대상이 플레이어인지 확인
+			{
+				targetObj = collision.gameObject;//플레이어의 게임 오브젝트를 받음
+				canTeleport = true; // 텔레포트 가능 여부 설정
+				interactionUI.SetActive(true); // 텍스트를 보이게 함
+			}
+		}
     }
 
     private void OnTriggerExit2D(Collider2D collision)//문과의 충돌이 종료
@@ -61,7 +64,7 @@ public class Teleport : MonoBehaviour
 		if (canTeleport && !isTeleporting && Input.GetKeyDown(KeyCode.E))
 		{
 			//만약 이상현상에 해당되고, 자기 자신의 collder가 door_2이면
-			if (GameManager.Instance.abnorbalManager.flag == 29 && myCollider.CompareTag("door_2"))
+			if (GameManager.Instance.abnorbalManager.flag == 30 && myCollider.CompareTag("door_2"))
 			{
 				//상호 작용 할 때 마다 문이 잠긴 효과음을 출력하고
 				GameManager.Instance.audioController.PlayDoorLocked();
@@ -72,7 +75,7 @@ public class Teleport : MonoBehaviour
 					GameManager.Instance.playerController.cnt += 1;
 				}
 			}
-			if (GameManager.Instance.abnorbalManager.flag == 30 && myCollider.CompareTag("door_2"))
+			else if (GameManager.Instance.abnorbalManager.flag == 31 && myCollider.CompareTag("door_2"))
 			{
 				//상호 작용 할 때 마다 문이 잠긴 효과음을 출력하고
 				GameManager.Instance.audioController.PlayDoorLocked();

@@ -229,6 +229,8 @@ public class UiSystem : MonoBehaviour
 		if (GameManager.Instance.isAbnormal == true || GameManager.Instance.isAbnormal == false && GameManager.level == 0)
 		{
 			GameManager.level += 1;
+			//다음 씬 로드
+			abnorbalManager.nextStage();
 		}
 		else //이상현상이 발생하지 않았는데, 침대와 상호작용하면 실패, 레벨을 초기화한다.
 		{
@@ -239,8 +241,6 @@ public class UiSystem : MonoBehaviour
 		//LightController의 FadeOutLight() 코루틴 호출
 		yield return lightController.FadeOutLight();
 
-		//다음 씬 로드
-		abnorbalManager.nextStage();
 
 		this.Awake();
 
@@ -255,36 +255,39 @@ public class UiSystem : MonoBehaviour
 	//특정 콜라이더와 충돌한 경우
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.CompareTag("Paper")) //충돌한 콜라이더의 태그가 종이인 경우
+		if (GameManager.Instance.playerAnimationController.playerDeadCoroutine == false)
 		{
-			//함수 호출(flag ; 1로 설정)
-			ShowUIInteraction(1);
+			if (collision.CompareTag("Paper")) //충돌한 콜라이더의 태그가 종이인 경우
+			{
+				//함수 호출(flag ; 1로 설정)
+				ShowUIInteraction(1);
+			}
+			else if (collision.CompareTag("vandingMachine")) //충돌한 콜라이더의 태그가 자판기
+			{
+				//함수 호출(flag : 2로 설정)
+				ShowUIInteraction(2);
+			}
+			else if (collision.CompareTag("extensometer")) //충돌한 콜라이더의 태그가 신장계
+			{
+				//함수 호출(flag : 3로 설정)
+				ShowUIInteraction(3);
+			}
+			else if (collision.CompareTag("bed")) //충돌한 콜라이더의 태그가 침대
+			{
+				//함수 호출(flag : 4로 설정)
+				ShowUIInteraction(4);
+			}
+			else if (collision.CompareTag("Ab_extensometer")) //충돌한 콜라이더의 태그가 이상현상 신장계
+			{
+				//함수 호출(flag : 6로 설정)
+				ShowUIInteraction(6);
+			}
+			else if (collision.CompareTag("Ab_vandingMachine")) //충돌한 콜라이더의 태그가 이상현상 자판기
+			{
+				//함수 호출(flag : 7로 설정)
+				ShowUIInteraction(7);
+			}
 		}
-		else if (collision.CompareTag("vandingMachine")) //충돌한 콜라이더의 태그가 자판기
-		{
-			//함수 호출(flag : 2로 설정)
-			ShowUIInteraction(2);
-		}
-		else if (collision.CompareTag("extensometer")) //충돌한 콜라이더의 태그가 신장계
-		{
-			//함수 호출(flag : 3로 설정)
-			ShowUIInteraction(3);
-		}
-		else if (collision.CompareTag("bed")) //충돌한 콜라이더의 태그가 침대
-		{
-			//함수 호출(flag : 4로 설정)
-			ShowUIInteraction(4);
-		}
-        else if (collision.CompareTag("Ab_extensometer")) //충돌한 콜라이더의 태그가 이상현상 신장계
-        {
-            //함수 호출(flag : 6로 설정)
-            ShowUIInteraction(6);
-        }
-        else if (collision.CompareTag("Ab_vandingMachine")) //충돌한 콜라이더의 태그가 이상현상 자판기
-        {
-            //함수 호출(flag : 7로 설정)
-            ShowUIInteraction(7);
-        }
     }
 
 	//해당 UI와 관련된 것들을 바꾸는 함수
