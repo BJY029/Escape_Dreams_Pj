@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class GameManager : MonoBehaviour
 	public LightController lightController;
 	public UiSystem uiSystem;
 	public playerAnimationController playerAnimationController;
+	public CatDialogController catDialogController;
+	public EventSystem eventSystem;
+	public SceneManager sceneManager;
 
 	//이상현상 여부를 판단하는 플래그
 	public bool isAbnormal;

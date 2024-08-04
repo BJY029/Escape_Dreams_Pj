@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
 		flag = 1.0f;
 		direction = 1.0f;
 		acc = 1.0f;
+
 		rb = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
@@ -63,9 +64,10 @@ public class Player : MonoBehaviour
 	//프레임마다 작업량이 다르므로 호출 주기가 일정하지 않다.
 	private void Update()
 	{
+		if (GameManager.Instance.sceneManager.SceneisStarting == true) return;
 		UpdateColliderSize();
 		//코루틴이 실행중이면
-		if (uiSystem.isBedCoroutineRunning == true)
+		if (uiSystem.isBedCoroutineRunning == true || GameManager.Instance.playerAnimationController.isRespawning == true)
 		{
 			//이벤트 시스템 비활성화 = 입력 제한
 			uiSystem.eventSystem.enabled = false;

@@ -10,6 +10,7 @@ public class playerAnimationController : MonoBehaviour
 	public GameObject CatRespawnLocation;
 	public bool playerDeadCoroutine;
 	public bool canRespawn;
+	public bool isRespawning;
 
 	private CinemachineBrain CinemachineBrain;
 	public CinemachineVirtualCameraBase targetCamera;
@@ -55,6 +56,7 @@ public class playerAnimationController : MonoBehaviour
 	//플레이어 사망 코루틴
 	public IEnumerator PlayerDeadRoutine()
 	{
+		animator.SetFloat("Speed", 0f); 
 		//해당 코루틴이 실행되는 중임을 알리는 플래그
 		playerDeadCoroutine = true;
 
@@ -79,6 +81,8 @@ public class playerAnimationController : MonoBehaviour
 
 	public IEnumerator RespawnRoutine()
 	{
+		isRespawning = true;
+
 		//리스폰 위치로 플레이어와 고양이 이동
 		GameManager.Instance.player.transform.position = PlayerRespawnLocation.transform.position;
 		GameManager.Instance.cat.transform.position = CatRespawnLocation.transform.position;
@@ -111,17 +115,26 @@ public class playerAnimationController : MonoBehaviour
 		//애니메이션을 위해 파라미터 초기화
 		animator.SetBool("IsAlive", true);
 
+
 		//시간 정상 작동
 		Time.timeScale = 1f;
+
+
+		//빛 효과 코루틴 호출
+		yield return(StartCoroutine(GameManager.Instance.lightController.InitAllLights()));
 
 		//각종 플래그 초기화
 		canRespawn = false;
 		playerDeadCoroutine = false;
-
-		//빛 효과 코루틴 호출
-		StartCoroutine(GameManager.Instance.lightController.InitAllLights());
+		isRespawning = false;
 
 
+		//버그 방지를 위해 cat대화창 오브젝트 활성화
+		GameManager.Instance.catDialogController.gameObject.SetActive(true);
+		//대화 창을 출력하는 코루틴 호출
+		yield return StartCoroutine(GameManager.Instance.catDialogController.dialogController());
+
+	
 		yield return null;
 	}
 }
