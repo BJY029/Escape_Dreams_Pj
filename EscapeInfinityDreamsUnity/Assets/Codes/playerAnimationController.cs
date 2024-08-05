@@ -53,8 +53,22 @@ public class playerAnimationController : MonoBehaviour
 		}
 	}
 
-	//플레이어 사망 코루틴
-	public IEnumerator PlayerDeadRoutine()
+    private void OnTriggerEnter2D(Collider2D collision)  
+    {
+        if (collision.CompareTag("enemy"))     //적과 충돌했을 때, 사망한다.
+        {
+            if (animator.GetBool("IsAlive") == true)
+            {
+                GameManager.Instance.playerController.flag = 0f;
+                Dead(); //상태 변경 함수 호출
+                        //관련 코루틴 실행
+                StartCoroutine(PlayerDeadRoutine());
+            }
+        }
+    }
+
+    //플레이어 사망 코루틴
+    public IEnumerator PlayerDeadRoutine()
 	{
 		animator.SetFloat("Speed", 0f); 
 		//해당 코루틴이 실행되는 중임을 알리는 플래그
