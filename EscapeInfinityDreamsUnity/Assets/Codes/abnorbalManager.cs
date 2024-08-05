@@ -46,6 +46,8 @@ public class abnorbalManager : MonoBehaviour
         abnormals[21].SetActive(false);      //방의 스위치 비활성화
         abnormals[22].SetActive(true);      //방의 작은 의자 활성화
         abnormals[23].SetActive(false);     //방의 포스터 비활성화
+        abnormals[32].SetActive(false);     //방의 적 비활성화
+        abnormals[33].SetActive(false);     //복도의 적 비활성화
 
         //텍스트 초기화 작업
         PaperText.text = "우리 병원은.... 환자들의 건강을 최우선으로 생각합니다.\n우리 병원은.... 최고의 시설을 자랑합니다.\n우리 병원은.... 웃음으로 가득 차 있습니다.";
@@ -193,6 +195,16 @@ public class abnorbalManager : MonoBehaviour
 				//AudioController에서 참조된다.
 				flag = 31;
 			}
-		}
+			else if(ranIdx == 32) //방의 적을 생성
+			{
+                abnormals[32].SetActive(true);
+                Debug.Log("R_enemy actived");
+			}
+            else if (ranIdx == 33) //방의 적을 생성
+            {
+                abnormals[33].SetActive(true);
+                Debug.Log("enemy actived");
+            }
+        }
 	}
 }
