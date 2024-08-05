@@ -15,6 +15,7 @@ TagManager:
   - Window
   - door_2
   - Ab_vandingMachine
+  - enemy
   layers:
   - Default
   - TransparentFX
