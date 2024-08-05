@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 	public CatDialogController catDialogController;
 	public EventSystem eventSystem;
 	public SceneManager sceneManager;
+	public catAnimationController catAnimationController;
 
 	//이상현상 여부를 판단하는 플래그
 	public bool isAbnormal;

@@ -50,7 +50,7 @@ public class catAnimationController : MonoBehaviour
 		}
 	}
 
-	void BackAnimatorController()
+	public void BackAnimatorController()
 	{
 		//기존 고양이 애니메이션 컨트롤러로 변경
 		if (animator != null && newController != null && origController != null)
