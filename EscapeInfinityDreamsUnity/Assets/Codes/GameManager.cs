@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,7 +18,7 @@ public class GameManager : MonoBehaviour
 	public playerAnimationController playerAnimationController;
 	public CatDialogController catDialogController;
 	public EventSystem eventSystem;
-	public SceneManager sceneManager;
+	public sceneController sceneManager;
 	public catAnimationController catAnimationController;
 
 	//이상현상 여부를 판단하는 플래그
@@ -35,6 +37,13 @@ public class GameManager : MonoBehaviour
 	//중복 방지 함수
 	public bool LevelSystem(int idx)
 	{
+		//레벨을 모두 클리어 하여 8이 되면
+		if (level == 8)
+		{
+			//씬 전환
+			SceneManager.LoadScene("BossScene");
+			return true;
+		}
 		//현재 진행된 레벨 수 만큼 반복문을 돈다.
 		for (int i = 0; i < level; i++)
 		{

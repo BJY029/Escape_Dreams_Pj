@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneManager : MonoBehaviour
+public class sceneController : MonoBehaviour
 {
     public bool SceneisStarting;
     void Start()

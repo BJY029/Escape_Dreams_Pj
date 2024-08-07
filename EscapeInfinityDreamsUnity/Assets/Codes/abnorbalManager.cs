@@ -77,6 +77,9 @@ public class abnorbalManager : MonoBehaviour
 		//만약 해당 함수에서 true가 반환되면 중복된 인덱스가 아닌것이므로, 반복문을 빠져나오고 게임이 진행된다.
 		//만약 해당 함수에서 false가 반환되면 중복된 인덱스이므로, 반복문을 돌아 새로운 랜덤 인덱스를 다시 뽑는다.
 
+		//레벨 8이면 아무것도 하지 않고 리턴한다.
+		if (GameManager.level == 8) return;
+
 		//ranIdx = 33; //이상현상 정상 작동 테스트 용
 
 		//오류 방지 코드
