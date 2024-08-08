@@ -17,6 +17,7 @@ TagManager:
   - Ab_vandingMachine
   - enemy
   - WareWolfSpawnTime
+  - attackRange
   layers:
   - Default
   - TransparentFX

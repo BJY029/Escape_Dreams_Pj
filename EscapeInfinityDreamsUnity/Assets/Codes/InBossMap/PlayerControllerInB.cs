@@ -12,7 +12,7 @@ public class PlayerControllerInB : MonoBehaviour
 	private float direction;
 
 	Rigidbody2D rb;
-	Animator animator;	
+	public Animator animator;	
 	SpriteRenderer spriteRenderer;
 	private BoxCollider2D boxCollider;
 
@@ -39,6 +39,12 @@ public class PlayerControllerInB : MonoBehaviour
 			return;
 		}
 		Speed = 3f;
+
+		if (GameManagerInB.instance.warewolfController.isExecuting == true)
+		{
+			Speed = 0f;
+			return;
+		}
 
 		inputVec.x = Input.GetAxisRaw("Horizontal");
 		if(Input.GetKey(KeyCode.LeftShift))
@@ -78,6 +84,12 @@ public class PlayerControllerInB : MonoBehaviour
 		if (collision.CompareTag("WareWolfSpawnTime"))
 		{
 			GameManagerInB.instance.warewolfController.activeSprite();
+		}
+		//늑대 콜라이더와 충돌했고, 처형 코루틴을 실행중이 아니면
+		if (collision.CompareTag("attackRange") && GameManagerInB.instance.warewolfController.isExecuting == false)
+		{
+			//처형 함수 호출
+			GameManagerInB.instance.warewolfController.Execute();
 		}
 	}
 
