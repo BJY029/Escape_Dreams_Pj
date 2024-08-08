@@ -31,6 +31,14 @@ public class PlayerControllerInB : MonoBehaviour
 	private void Update()
 	{
 		UpdateColliderSize();
+		
+		if (GameManagerInB.instance.warewolfController.isActiveWolfRun == true)
+		{
+			animator.Play("Idle_0");
+			Speed = 0f;
+			return;
+		}
+		Speed = 3f;
 
 		inputVec.x = Input.GetAxisRaw("Horizontal");
 		if(Input.GetKey(KeyCode.LeftShift))
@@ -62,6 +70,22 @@ public class PlayerControllerInB : MonoBehaviour
 		{
 			boxCollider.size = spriteRenderer.bounds.size;
 			boxCollider.offset = spriteRenderer.bounds.center - transform.position;
+		}
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.CompareTag("WareWolfSpawnTime"))
+		{
+			GameManagerInB.instance.warewolfController.activeSprite();
+		}
+	}
+
+	private void OnTriggerExit2D(Collider2D collision)
+	{
+		if(collision.CompareTag("WareWolfSpawnTime"))
+		{
+			collision.gameObject.SetActive(false);
 		}
 	}
 }

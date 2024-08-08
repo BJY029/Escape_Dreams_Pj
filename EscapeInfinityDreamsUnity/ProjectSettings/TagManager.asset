@@ -16,6 +16,7 @@ TagManager:
   - door_2
   - Ab_vandingMachine
   - enemy
+  - WareWolfSpawnTime
   layers:
   - Default
   - TransparentFX
