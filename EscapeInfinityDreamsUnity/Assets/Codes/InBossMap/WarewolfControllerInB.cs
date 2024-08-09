@@ -7,6 +7,7 @@ public class WarewolfControllerInB : MonoBehaviour
     public Transform wareWolf;
     public float moveSpeed;
 	public float stopDistance = 0.5f;
+	public float flag;
 
 	public float cameraChangeTime;
 	public bool isActiveWolfRun;
@@ -32,6 +33,7 @@ public class WarewolfControllerInB : MonoBehaviour
 		wareWolf.gameObject.SetActive(false);
 		startChasing = false;
 		canRespawn = false;
+		flag = 1.0f;
 	}
 
 	public void InitAll()
@@ -76,7 +78,7 @@ public class WarewolfControllerInB : MonoBehaviour
 	private void FixedUpdate()
 	{
 		//늑대 움직임 구현
-		rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+		rb.MovePosition(rb.position + movement * flag * moveSpeed * Time.fixedDeltaTime);
 	}
 
 	//플레이어가 특정 위치에 도달한 경우 호출된다.
