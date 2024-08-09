@@ -10,16 +10,20 @@ public class PlayerControllerInB : MonoBehaviour
 	public float Speed;
 	private float run;
 	private float direction;
+	private float flag;
 
 	Rigidbody2D rb;
 	public Animator animator;	
 	SpriteRenderer spriteRenderer;
 	private BoxCollider2D boxCollider;
 
+	public GameObject WolfSpawntimeL;
+
 	private void Awake()
 	{
 		run = 1.0f;
 		direction = 1.0f;
+		flag = 1.0f;
 		rb = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
@@ -28,24 +32,32 @@ public class PlayerControllerInB : MonoBehaviour
 		animator.SetBool("IsAlive", true);
 	}
 
+	public void InitAll()
+	{
+		spriteRenderer.flipX = true;
+		WolfSpawntimeL.SetActive(true);
+	}
+
 	private void Update()
 	{
 		UpdateColliderSize();
 		
-		if (GameManagerInB.instance.warewolfController.isActiveWolfRun == true)
+		if (GameManagerInB.instance.warewolfController.isActiveWolfRun == true
+			|| GameManagerInB.instance.playerStateControllerInB.isRespawning == true)
 		{
+			flag = 0f;
 			animator.Play("Idle_0");
-			Speed = 0f;
 			return;
 		}
-		Speed = 3f;
 
-		if (GameManagerInB.instance.warewolfController.isExecuting == true)
+		if(GameManagerInB.instance.warewolfController.isExecuting == true)
 		{
-			Speed = 0f;
+			flag = 0f;
 			return;
 		}
 
+
+		flag = 1.0f;
 		inputVec.x = Input.GetAxisRaw("Horizontal");
 		if(Input.GetKey(KeyCode.LeftShift))
 		{
@@ -62,7 +74,7 @@ public class PlayerControllerInB : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		Vector2 nextVec = inputVec * Speed * run * direction * Time.fixedDeltaTime;
+		Vector2 nextVec = inputVec * flag * Speed * run * direction * Time.fixedDeltaTime;
 		rb.MovePosition(rb.position + nextVec);
 
 		if (inputVec.x > 0) spriteRenderer.flipX = false;

@@ -10,6 +10,7 @@ public class WarewolfControllerInB : MonoBehaviour
 	public bool isActiveWolfRun;
 	public bool isExecuting;
 	public bool startChasing;
+	public bool canRespawn;
 
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -27,6 +28,12 @@ public class WarewolfControllerInB : MonoBehaviour
 		//시작과 동시에 해당 스프라이트를 활성화 해제 한다.
 		wareWolf.gameObject.SetActive(false);
 		startChasing = false;
+		canRespawn = false;
+	}
+
+	public void InitAll()
+	{
+		wareWolf.gameObject.SetActive(false);
 	}
 
 	private void Update()
@@ -103,10 +110,15 @@ public class WarewolfControllerInB : MonoBehaviour
 
 		//플레이어로 카메라를 줌인 하는 함수 호출
 		GameManagerInB.instance.wolfZoomInCameraInB.SwitchToZoomCameraToPlayer();
+
+		
+
 		//플레이어 사망 애니메이션 설정
 		GameManagerInB.instance.playerController.animator.SetBool("IsAlive", false);
 		GameManagerInB.instance.playerController.animator.Play("die_0");
-		yield return new WaitForSeconds(2.0f);
+		//빛 효과 연출
+		yield return GameManagerInB.instance.lightControllerInB.PlayerDeadLight();
+		//yield return new WaitForSeconds(2.0f);
 
 		//재시작 안내 UI 노출
 		GameManagerInB.instance.UIControllerInB.activeDeadStateUI();
@@ -114,8 +126,10 @@ public class WarewolfControllerInB : MonoBehaviour
 		//시간 멈춤
 		Time.timeScale = 0f;
 
+		canRespawn = true;
 		//isExecuting = false;
 	}
+
 
 	//collider 사이즈를 업데이트 하는 함수
 	void UpdateColliderSize()

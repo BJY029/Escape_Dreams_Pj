@@ -12,6 +12,8 @@ public class GameManagerInB : MonoBehaviour
 	public WarewolfControllerInB warewolfController;
 	public WolfZoomInCameraInB wolfZoomInCameraInB;
 	public UIControllerInB UIControllerInB;
+	public LightControllerInB lightControllerInB;
+	public PlayerStateControllerInB playerStateControllerInB;
 
 	private void Awake()
 	{
