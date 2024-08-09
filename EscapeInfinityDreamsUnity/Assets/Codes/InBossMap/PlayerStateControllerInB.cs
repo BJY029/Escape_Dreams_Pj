@@ -62,6 +62,7 @@ public class PlayerStateControllerInB : MonoBehaviour
 		//각종 플래그 초기화
 		GameManagerInB.instance.warewolfController.isExecuting = false;
 		GameManagerInB.instance.warewolfController.canRespawn = false;
+		GameManagerInB.instance.warewolfController.startChasing = false;
 		isRespawning = false;
 
 		yield return null;

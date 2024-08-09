@@ -35,9 +35,10 @@ public class TeleportInB : MonoBehaviour
 	{
         if (collision.CompareTag("Player"))
         {
-            targetObj = collision.gameObject;
+			targetObj = collision.gameObject;
             canTeleport = true;
             interactionUI.SetActive(true);
+
         }
 	}
 
@@ -52,7 +53,14 @@ public class TeleportInB : MonoBehaviour
 
 	private void Update()
 	{
-		if(canTeleport && !isTeleproting && Input.GetKeyDown(KeyCode.E))
+        if (GameManagerInB.instance.warewolfController.isExecuting == true)
+        {
+            interactionUI.SetActive(false );
+            return;
+        }
+            
+        
+        if (canTeleport && !isTeleproting && Input.GetKeyDown(KeyCode.E))
         {
             StartCoroutine(TeleportRoutine());
         }

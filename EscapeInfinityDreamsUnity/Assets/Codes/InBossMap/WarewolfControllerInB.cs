@@ -6,12 +6,15 @@ public class WarewolfControllerInB : MonoBehaviour
 {
     public Transform wareWolf;
     public float moveSpeed;
+	public float stopDistance = 0.5f;
+
 	public float cameraChangeTime;
 	public bool isActiveWolfRun;
 	public bool isExecuting;
 	public bool startChasing;
 	public bool canRespawn;
 
+	public GameObject WareWolfLocation;
     private Rigidbody2D rb;
     private Vector2 movement;
 	Animator animator;
@@ -33,6 +36,8 @@ public class WarewolfControllerInB : MonoBehaviour
 
 	public void InitAll()
 	{
+		//늑대인간의 위치를 초기화한다.
+		wareWolf.transform.position = WareWolfLocation.transform.position;
 		wareWolf.gameObject.SetActive(false);
 	}
 
@@ -41,7 +46,37 @@ public class WarewolfControllerInB : MonoBehaviour
 		//주기적으로 늑대인간의 collider를 업데이트 해준다.
 		UpdateColliderSize();
 
+		//따라오는 상황이 아니면 따라오지 않는다.
 		if (startChasing == false) return;
+
+		//방향 계산
+		Vector2 direction = (GameManagerInB.instance.player.transform.position - transform.position).normalized;
+
+		//거리 계산
+		float distanceToPlayer = Vector2.Distance(transform.position, GameManagerInB.instance.player.transform.position);
+
+		
+		//만약 거리가 정지 지점보다 크면
+		if(distanceToPlayer > stopDistance)
+		{
+			//계속 따라온다.
+			movement = direction;
+		}
+		else
+		//정지 지점에 도달하면
+		{
+			//움직임을 멈춘다.
+			movement = Vector2.zero;
+		}
+
+		//움직임에 따른 애니메이션 설정
+		animator.SetFloat("Speed", movement.magnitude * moveSpeed);
+	}
+
+	private void FixedUpdate()
+	{
+		//늑대 움직임 구현
+		rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
 	}
 
 	//플레이어가 특정 위치에 도달한 경우 호출된다.
@@ -52,7 +87,6 @@ public class WarewolfControllerInB : MonoBehaviour
 		wareWolf.gameObject.SetActive(true);
 		//코루틴 호출
 		StartCoroutine(activeWolf());
-		startChasing = true;
 	}
 
 	//늑대 collider와 닿아서 처형당하는 상황일 때 호출된다.
@@ -89,6 +123,7 @@ public class WarewolfControllerInB : MonoBehaviour
 
 		//플래그 해제
 		isActiveWolfRun = false;
+		startChasing = true;
 	}
 
 	//플레이어 사망 효과 코루틴
@@ -100,7 +135,6 @@ public class WarewolfControllerInB : MonoBehaviour
 		//카메라 전환
 		GameManagerInB.instance.wolfZoomInCameraInB.SwitchToZoomCamera();
 		//전환 간 대기
-		yield return new WaitForSeconds(cameraChangeTime);
 
 		//특정 애니메이션 재생
 		animator.SetBool("Bark", true);
