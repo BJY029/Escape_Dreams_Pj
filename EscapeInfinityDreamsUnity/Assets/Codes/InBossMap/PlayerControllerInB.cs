@@ -41,7 +41,9 @@ public class PlayerControllerInB : MonoBehaviour
 	private void Update()
 	{
 		UpdateColliderSize();
-		
+
+		if (GameManagerInB.instance.sceneControllerInB.SceneStarting == true) return;
+
 		if (GameManagerInB.instance.warewolfController.isActiveWolfRun == true
 			|| GameManagerInB.instance.playerStateControllerInB.isRespawning == true)
 		{
