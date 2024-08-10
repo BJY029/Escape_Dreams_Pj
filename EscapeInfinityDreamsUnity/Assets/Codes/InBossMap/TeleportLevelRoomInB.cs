@@ -65,7 +65,7 @@ public class TeleportLevelRoomInB : MonoBehaviour
 	private void Update()
 	{
 		//텔포를 시도했을 때
-		if(canTeleport && !isTeleporting && Input.GetKeyDown(KeyCode.E))
+		if(canTeleport && !isTeleporting && GameManagerInB.instance.warewolfController.isExecuting != true &&Input.GetKeyDown(KeyCode.E))
 		{
 			//코루틴 호출
 			StartCoroutine(TeleportRoutine());
