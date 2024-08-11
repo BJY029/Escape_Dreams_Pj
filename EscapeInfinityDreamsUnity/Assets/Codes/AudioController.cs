@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class AudioController : MonoBehaviour
 {
+	public AudioClip[] walkClips;
 	public AudioClip[] clips; //오디오 리소스 리스트
 	public AudioSource[] m_AudioSources; //오디오 재생하는 audioSource 리스트
+
+	private int randIdx;
 
 	public void PlayDoorOpenSound() //문 열릴 때 호출하는 함수
 	{
@@ -93,5 +96,13 @@ public class AudioController : MonoBehaviour
 				m_AudioSources[i].Stop();
 			}
 		}
+	}
+
+	public IEnumerator playWalkSound()
+	{
+		randIdx = Random.Range(0, walkClips.Length);
+		GameManager.Instance.playerController.AudioSource.clip = walkClips[randIdx];
+		GameManager.Instance.playerController.AudioSource.Play();
+		yield return null;
 	}
 }

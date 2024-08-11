@@ -80,7 +80,7 @@ public class abnorbalManager : MonoBehaviour
 		//레벨 8이면 아무것도 하지 않고 리턴한다.
 		if (GameManager.level == 8) return;
 
-		//ranIdx = 33; //이상현상 정상 작동 테스트 용
+		//ranIdx = 26; //이상현상 정상 작동 테스트 용
 
 		//오류 방지 코드
 		if (abnormals[ranIdx] == null)

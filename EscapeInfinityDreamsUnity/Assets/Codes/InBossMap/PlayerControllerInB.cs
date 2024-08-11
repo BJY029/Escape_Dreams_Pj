@@ -11,11 +11,19 @@ public class PlayerControllerInB : MonoBehaviour
 	private float run;
 	private float direction;
 	private float flag;
+	private bool isWalking;
+	private bool isRunning;
+
+	public float WalkSoundInterval = 0.5f;
+	private float WalkSoundTimer;
+	public float RunSoundInterval = 0.2f;
+	private float RunSoundTimer;
 
 	Rigidbody2D rb;
 	public Animator animator;	
 	SpriteRenderer spriteRenderer;
 	private BoxCollider2D boxCollider;
+	public AudioSource audioSource;
 
 	public GameObject WolfSpawntimeL;
 
@@ -28,7 +36,10 @@ public class PlayerControllerInB : MonoBehaviour
 		animator = GetComponent<Animator>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		boxCollider = GetComponent<BoxCollider2D>();
+		audioSource = GetComponent<AudioSource>();
 
+		isWalking = false;
+		isRunning = false;
 		animator.SetBool("IsAlive", true);
 	}
 
@@ -71,6 +82,55 @@ public class PlayerControllerInB : MonoBehaviour
 			run = 1.0f;
 			animator.SetBool("run", false);
 		}
+
+		if(Mathf.Abs(inputVec.x) > 0.1f)
+		{
+			if(run == 2.0f)
+			{
+				isRunning = true;
+				isWalking = false;
+			}
+			else
+			{
+				isWalking = true;
+				isRunning = false;
+			}
+		}
+		else
+		{
+			isWalking = false;
+			isRunning = false;	
+		}
+
+
+		if(isWalking)
+		{
+			WalkSoundTimer -= Time.deltaTime;
+			if (WalkSoundTimer <= 0f)
+			{
+				StartCoroutine(GameManagerInB.instance.audioControllerInB.playWalkSound());
+				WalkSoundTimer = WalkSoundInterval;
+			}
+		}
+		else
+		{
+			WalkSoundTimer = 0f;
+		}
+
+		if (isRunning)
+		{
+			RunSoundTimer -= Time.deltaTime;
+			if(RunSoundTimer <= 0f)
+			{
+				StartCoroutine(GameManagerInB.instance.audioControllerInB.playWalkSound());
+				RunSoundTimer = RunSoundInterval;	
+			}
+		}
+		else
+		{
+			RunSoundTimer = 0f;
+		}
+
 		animator.SetFloat("Speed", inputVec.magnitude);
 	}
 

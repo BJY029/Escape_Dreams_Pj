@@ -19,7 +19,15 @@ public class Player : MonoBehaviour
 	public Light2D GlobalLight;
 	private ShadowCaster2D shadowCaster;
 	private BoxCollider2D boxCollider;
+	public AudioSource AudioSource;
 	public int cnt;
+
+	private bool isWalking;
+	private bool isRunning;
+	public float WalkSoundInterval = 0.5f;
+	private float WalkSoundTimer;
+	public float RunSoundInterval = 0.3f;
+	private float RunSoundTimer;
 
 	public float waitTime = 1.0f;
 
@@ -34,11 +42,15 @@ public class Player : MonoBehaviour
 		direction = 1.0f;
 		acc = 1.0f;
 
+		isWalking = false;
+		isRunning = false;
+
 		rb = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		shadowCaster = GetComponent<ShadowCaster2D>();
 		boxCollider = GetComponent<BoxCollider2D>();
+		AudioSource = GetComponent<AudioSource>();
 	}
 
 	//창문 오디오를 한번만 재생하기 위해 cnt를 0으로 초기화 하는 함수
@@ -53,7 +65,8 @@ public class Player : MonoBehaviour
 		direction = 1.0f;
 		acc = 1.0f;
 		shadowCaster.enabled = true;
-
+		WalkSoundInterval = 0.5f;
+		RunSoundInterval = 0.3f;
 	}
 
 	private void Start()
@@ -101,6 +114,54 @@ public class Player : MonoBehaviour
 			animator.SetBool("run", false);
 		}
 
+
+		if (Mathf.Abs(inputVec.x) > 0.1f)
+		{
+			if (run == 2.0f)
+			{
+				isRunning = true;
+				isWalking = false;
+			}
+			else
+			{
+				isWalking = true;
+				isRunning = false;
+			}
+		}
+		else
+		{
+			isWalking = false;
+			isRunning = false;
+		}
+
+
+		if (isWalking)
+		{
+			WalkSoundTimer -= Time.deltaTime;
+			if (WalkSoundTimer <= 0f)
+			{
+				StartCoroutine(GameManager.Instance.audioController.playWalkSound());
+				WalkSoundTimer = WalkSoundInterval;
+			}
+		}
+		else
+		{
+			WalkSoundTimer = 0f;
+		}
+
+		if (isRunning)
+		{
+			RunSoundTimer -= Time.deltaTime;
+			if (RunSoundTimer <= 0f)
+			{
+				StartCoroutine(GameManager.Instance.audioController.playWalkSound());
+				RunSoundTimer = RunSoundInterval;
+			}
+		}
+		else
+		{
+			RunSoundTimer = 0f;
+		}
 	}
 
 	//함수 호출 간격이 일정하도록 보장하는 update 함수다.
@@ -165,10 +226,14 @@ public class Player : MonoBehaviour
 			if (collision.CompareTag("mainMap") || collision.CompareTag("Room_1"))
 			{
 				acc = 2.0f;
+				WalkSoundInterval = 0.3f;
+				RunSoundInterval = 0.2f;
 			}
 			else if (collision.CompareTag("Room_0"))
 			{
 				acc = 1.0f;
+				WalkSoundInterval = 0.5f;
+				RunSoundInterval = 0.3f;
 			}
 		}
 		if (abnorbalManager.flag == 27) //그림자 삭제인 경우
