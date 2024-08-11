@@ -8,12 +8,16 @@ public class WarewolfControllerInB : MonoBehaviour
     public float moveSpeed;
 	public float stopDistance = 0.5f;
 	public float flag;
+	public int RoomFlag;
 
 	public float cameraChangeTime;
 	public bool isActiveWolfRun;
 	public bool isExecuting;
 	public bool startChasing;
 	public bool canRespawn;
+	bool isRunning;
+	public float RunSoundInterval;
+	private float RunSoundTimer;
 
 	public GameObject WareWolfLocation;
     private Rigidbody2D rb;
@@ -21,6 +25,7 @@ public class WarewolfControllerInB : MonoBehaviour
 	Animator animator;
 	private SpriteRenderer spriteRenderer;
 	private BoxCollider2D boxCollider;
+	public AudioSource audioSource;
 
 	private void Start()
 	{
@@ -28,12 +33,15 @@ public class WarewolfControllerInB : MonoBehaviour
 		animator = GetComponent<Animator>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		boxCollider = GetComponent<BoxCollider2D>();
+		audioSource = GetComponent<AudioSource>();
 
 		//시작과 동시에 해당 스프라이트를 활성화 해제 한다.
 		wareWolf.gameObject.SetActive(false);
 		startChasing = false;
 		canRespawn = false;
 		flag = 1.0f;
+		isRunning = false;
+
 	}
 
 	public void InitAll()
@@ -63,22 +71,82 @@ public class WarewolfControllerInB : MonoBehaviour
 		{
 			//계속 따라온다.
 			movement = direction;
+			isRunning = true;
 		}
 		else
 		//정지 지점에 도달하면
 		{
 			//움직임을 멈춘다.
 			movement = Vector2.zero;
+			isRunning = false;
 		}
 
 		//움직임에 따른 애니메이션 설정
 		animator.SetFloat("Speed", movement.magnitude * moveSpeed);
+
+		if (isRunning)
+		{
+			RunSoundTimer -= Time.deltaTime;
+			if(RunSoundTimer <= 0f)
+			{
+				StartCoroutine(GameManagerInB.instance.audioControllerInB.playWolfWalkSound());
+				RunSoundTimer = RunSoundInterval;
+			}
+		}
+		else
+		{
+			RunSoundTimer = 0f;
+		}
 	}
 
 	private void FixedUpdate()
 	{
 		//늑대 움직임 구현
 		rb.MovePosition(rb.position + movement * flag * moveSpeed * Time.fixedDeltaTime);
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.CompareTag("Hall"))
+		{
+			RoomFlag = 0;
+		}
+		else if (collision.CompareTag("Level1"))
+		{
+			RoomFlag = 1;
+		}
+		else if (collision.CompareTag("Level2"))
+		{
+			RoomFlag = 2;
+		}
+		else if (collision.CompareTag("Level3"))
+		{
+			RoomFlag = 3;
+		}
+		else if (collision.CompareTag("Level4"))
+		{
+			RoomFlag = 4;
+		}
+		else if (collision.CompareTag("Level5"))
+		{
+			RoomFlag = 5;
+		}
+		else if (collision.CompareTag("Level6"))
+		{
+			RoomFlag = 6;
+		}
+		else if (collision.CompareTag("Level7"))
+		{
+			RoomFlag = 7;
+		}
+		else if (collision.CompareTag("Final"))
+		{
+			RoomFlag = 8;
+		}
+		else if (collision.CompareTag("WrongWay"))
+		{
+			RoomFlag = -1;
+		}
 	}
 
 	//플레이어가 특정 위치에 도달한 경우 호출된다.

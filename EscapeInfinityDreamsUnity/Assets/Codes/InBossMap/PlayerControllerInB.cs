@@ -13,6 +13,7 @@ public class PlayerControllerInB : MonoBehaviour
 	private float flag;
 	private bool isWalking;
 	private bool isRunning;
+	public int RoomFlag;
 
 	public float WalkSoundInterval = 0.5f;
 	private float WalkSoundTimer;
@@ -83,6 +84,7 @@ public class PlayerControllerInB : MonoBehaviour
 			animator.SetBool("run", false);
 		}
 
+		//우선 걷거나 뛰는지를 확인한다.
 		if(Mathf.Abs(inputVec.x) > 0.1f)
 		{
 			if(run == 2.0f)
@@ -102,9 +104,10 @@ public class PlayerControllerInB : MonoBehaviour
 			isRunning = false;	
 		}
 
-
+		//걷는다면
 		if(isWalking)
 		{
+			//걷기 주기 마다 효과음을 재생한다(0.5초)
 			WalkSoundTimer -= Time.deltaTime;
 			if (WalkSoundTimer <= 0f)
 			{
@@ -117,8 +120,10 @@ public class PlayerControllerInB : MonoBehaviour
 			WalkSoundTimer = 0f;
 		}
 
+		//뛴다면
 		if (isRunning)
 		{
+			//달리기 주기 마다 효과음을 재생한다.(0.2초)
 			RunSoundTimer -= Time.deltaTime;
 			if(RunSoundTimer <= 0f)
 			{
@@ -165,6 +170,48 @@ public class PlayerControllerInB : MonoBehaviour
 			//처형 함수 호출
 			GameManagerInB.instance.warewolfController.Execute();
 		}
+
+		if (collision.CompareTag("Hall"))
+		{
+			RoomFlag = 0;
+		}
+		else if (collision.CompareTag("Level1"))
+		{
+			RoomFlag = 1;
+		}
+		else if (collision.CompareTag("Level2"))
+		{
+			RoomFlag = 2;
+		}
+		else if (collision.CompareTag("Level3"))
+		{
+			RoomFlag = 3;
+		}
+		else if (collision.CompareTag("Level4"))
+		{
+			RoomFlag = 4;
+		}
+		else if (collision.CompareTag("Level5"))
+		{
+			RoomFlag = 5;
+		}
+		else if (collision.CompareTag("Level6"))
+		{
+			RoomFlag = 6;
+		}
+		else if (collision.CompareTag("Level7"))
+		{
+			RoomFlag = 7;
+		}
+		else if (collision.CompareTag("Final"))
+		{
+			RoomFlag = 8;
+		}
+		else if (collision.CompareTag("WrongWay"))
+		{
+			RoomFlag = -1;
+		}
+
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
