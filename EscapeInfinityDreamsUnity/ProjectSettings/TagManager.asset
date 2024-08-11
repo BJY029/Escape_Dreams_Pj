@@ -28,6 +28,7 @@ TagManager:
   - Level7
   - Final
   - WrongWay
+  - autoDoor
   layers:
   - Default
   - TransparentFX

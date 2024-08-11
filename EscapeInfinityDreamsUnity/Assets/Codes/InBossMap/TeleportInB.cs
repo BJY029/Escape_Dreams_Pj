@@ -13,8 +13,9 @@ public class TeleportInB : MonoBehaviour
     public CinemachineVirtualCamera nextRoomCamera;
     private Collider2D newConfiner;
     private Collider2D oldConfiner;
+
     public float teleportCooldown = 0.5f;
-  
+    
     private bool isTeleproting = false;
     private bool canTeleport = false;
 
@@ -24,6 +25,7 @@ public class TeleportInB : MonoBehaviour
 	private void Awake()
 	{
 		oldConfiner = GetComponent<Collider2D>();
+
 	}
 
 	private void Start()
@@ -62,6 +64,14 @@ public class TeleportInB : MonoBehaviour
         
         if (canTeleport && !isTeleproting && Input.GetKeyDown(KeyCode.E))
         {
+            if (oldConfiner.CompareTag("autoDoor"))
+            {
+                GameManagerInB.instance.audioControllerInB.openingAutoDoor();
+            }
+            else
+            {
+                GameManagerInB.instance.audioControllerInB.openingDoor();
+            }
             StartCoroutine(TeleportRoutine());
         }
 

@@ -67,6 +67,14 @@ public class TeleportLevelRoomInB : MonoBehaviour
 		//텔포를 시도했을 때
 		if(canTeleport && !isTeleporting && GameManagerInB.instance.warewolfController.isExecuting != true &&Input.GetKeyDown(KeyCode.E))
 		{
+			if (oldConfiner.CompareTag("autoDoor"))
+			{
+				GameManagerInB.instance.audioControllerInB.openingAutoDoor();
+			}
+			else
+			{
+				GameManagerInB.instance.audioControllerInB.openingDoor();
+			}
 			//코루틴 호출
 			StartCoroutine(TeleportRoutine());
 		}

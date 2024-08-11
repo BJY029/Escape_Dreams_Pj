@@ -178,6 +178,7 @@ public class WarewolfControllerInB : MonoBehaviour
 
 		//특정 애니메이션 재생
 		animator.SetBool("Bark", true);
+		GameManagerInB.instance.audioControllerInB.PlayRoar();
 		//애니메이션 재생 간 대기
 		yield return new WaitForSeconds(1.0f);
 
@@ -208,6 +209,7 @@ public class WarewolfControllerInB : MonoBehaviour
 
 		//특정 애니메이션 재생
 		animator.SetBool("Bark", true);
+		StartCoroutine(GameManagerInB.instance.audioControllerInB.attackPlay());
 		//애니메이션 재생 간 대기
 		yield return new WaitForSeconds(1.0f);
 		animator.SetBool("Bark", false);

@@ -4,14 +4,49 @@ using UnityEngine;
 
 public class AudioControllerInB : MonoBehaviour
 {
+    public AudioSource[] audioSources;
+
     //걷는 효과음 클립들을 저장할 리스트
+    public AudioClip WareWolfRoar;
     public AudioClip[] walkClips;
     public AudioClip[] wolfWalkClips;
+    public AudioClip[] attackClips;
+    public AudioClip[] ObjClips;
     //걷는 효과음을 랜덤 재생 하기위한 선언
     private int randomIdx;
+    private int idx = 0;
 
-    //걷거나 뛸때 효과음을 재생하는 코루틴
-    public IEnumerator playWalkSound()
+
+    public void openingDoor()
+    {
+        for(int i = 0; i<audioSources.Length; i++) 
+        {
+            if (!audioSources[i].isPlaying)
+            {
+                audioSources[i].clip = ObjClips[0];
+                audioSources[i].Play();
+                return;
+			}
+            
+        }
+    }
+
+    public void openingAutoDoor()
+    {
+		for (int i = 0; i < audioSources.Length; i++)
+		{
+			if (!audioSources[i].isPlaying)
+			{
+				audioSources[i].clip = ObjClips[1];
+				audioSources[i].Play();
+                return;
+			}
+			
+		}
+	}
+
+	//걷거나 뛸때 효과음을 재생하는 코루틴
+	public IEnumerator playWalkSound()
     {
         //랜덤 인덱스 선정
         randomIdx = Random.Range(0, walkClips.Length);
@@ -35,4 +70,26 @@ public class AudioControllerInB : MonoBehaviour
         }
 		yield return null;
 	}
+
+    public void PlayRoar()
+    {
+        GameManagerInB.instance.warewolfController.audioSource.clip = WareWolfRoar;
+        GameManagerInB.instance.warewolfController.audioSource.Play();
+	}
+
+    public IEnumerator attackPlay()
+    {
+        //리스트 길이만큼
+        while(idx < attackClips.Length)
+        {
+            //재생
+            GameManagerInB.instance.warewolfController.audioSource.clip = attackClips[idx];
+            GameManagerInB.instance.warewolfController.audioSource.Play();
+            //해당 오디오 소스 길이만큼 대기
+            yield return new WaitForSeconds(GameManagerInB.instance.warewolfController.audioSource.clip.length);
+            //다음 재생
+            idx++;
+		}
+        idx = 0;   
+    }
 }
