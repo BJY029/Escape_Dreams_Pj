@@ -82,6 +82,8 @@ public class abnorbalManager : MonoBehaviour
 
 		//ranIdx = 26; //이상현상 정상 작동 테스트 용
 
+		//참고 : 이상현상 리스트의 33~38까지는 더미로, 아무 이상현상이 발생하지 않는 확률의 수를 높이기 위함임
+		
 		//오류 방지 코드
 		if (abnormals[ranIdx] == null)
 		{
@@ -89,7 +91,7 @@ public class abnorbalManager : MonoBehaviour
 		}
 
 		//아무것도 변하지 않은 경우
-		if (ranIdx >= 0 && ranIdx <= 1)
+		if (ranIdx >= 0 && ranIdx <= 1 || ranIdx >= 34 && ranIdx <= 39)
 		{
 			GameManager.Instance.isAbnormal = false;//이상 현상이 발생되지 않았기에 false로 초기화
 			Debug.Log("Not Changed(Original Map");

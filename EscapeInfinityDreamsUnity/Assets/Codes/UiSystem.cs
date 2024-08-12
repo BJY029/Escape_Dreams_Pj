@@ -248,12 +248,14 @@ public class UiSystem : MonoBehaviour
 
 		GameManager.Instance.playerController.init(); 
 
-		isBedCoroutineRunning = false; //이벤트 시스템 다시 사용
+		
 
 		//버그 방지를 위해 해당 대화창 오브젝트를 활성화
 		GameManager.Instance.catDialogController.gameObject.SetActive(true);
 		//대화창을 출력하는 코루틴 호출
 		yield return StartCoroutine(GameManager.Instance.catDialogController.dialogController());
+
+		isBedCoroutineRunning = false; //이벤트 시스템 다시 사용
 	}
 
 

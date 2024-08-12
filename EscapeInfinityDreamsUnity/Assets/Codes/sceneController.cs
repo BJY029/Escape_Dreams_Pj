@@ -18,10 +18,11 @@ public class sceneController : MonoBehaviour
         //LightIn 코루틴을 호출하여 라이트가 들어오는 효과 재생
 		yield return StartCoroutine(GameManager.Instance.lightController.FadeInLight());
         //다시 이동이 가능하도록 플래그 초기화
-        SceneisStarting = false;
+        
 
         //대화창 노출 작업 진행
 		GameManager.Instance.catDialogController.gameObject.SetActive(true);
 		yield return StartCoroutine(GameManager.Instance.catDialogController.dialogController());
+		SceneisStarting = false;
 	}
 }

@@ -137,18 +137,16 @@ public class playerAnimationController : MonoBehaviour
 		//빛 효과 코루틴 호출
 		yield return(StartCoroutine(GameManager.Instance.lightController.InitAllLights()));
 
-		//각종 플래그 초기화
-		canRespawn = false;
-		playerDeadCoroutine = false;
-		isRespawning = false;
-
-
 		//버그 방지를 위해 cat대화창 오브젝트 활성화
 		GameManager.Instance.catDialogController.gameObject.SetActive(true);
 		//대화 창을 출력하는 코루틴 호출
 		yield return StartCoroutine(GameManager.Instance.catDialogController.dialogController());
 
-	
+		//각종 플래그 초기화
+		canRespawn = false;
+		playerDeadCoroutine = false;
+		isRespawning = false;
+
 		yield return null;
 	}
 }

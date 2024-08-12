@@ -16,7 +16,7 @@ public class GameManagerInB : MonoBehaviour
 	public PlayerStateControllerInB playerStateControllerInB;
 	public SceneControllerInB sceneControllerInB;
 	public AudioControllerInB audioControllerInB;
-
+	public DialogeControllerInB dialogeControllerInB;
 	private void Awake()
 	{
 		instance = this;

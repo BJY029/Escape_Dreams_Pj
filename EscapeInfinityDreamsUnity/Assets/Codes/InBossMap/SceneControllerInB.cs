@@ -15,6 +15,10 @@ public class SceneControllerInB : MonoBehaviour
     {
         SceneStarting = true;
         yield return GameManagerInB.instance.lightControllerInB.InitLights();
-        SceneStarting = false;
-    }
+        
+
+        GameManagerInB.instance.dialogeControllerInB.gameObject.SetActive(true);
+        yield return StartCoroutine(GameManagerInB.instance.dialogeControllerInB.StartDialogeInScene());
+		SceneStarting = false;
+	}
 }
