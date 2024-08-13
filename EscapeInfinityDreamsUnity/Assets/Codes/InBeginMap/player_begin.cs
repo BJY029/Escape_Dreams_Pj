@@ -8,7 +8,6 @@ public class player_begin : MonoBehaviour
 {
     private Vector2 inputVec;
     public float Speed;
-    private float run;
     private float direction;
     
 
@@ -18,8 +17,7 @@ public class player_begin : MonoBehaviour
     private BoxCollider2D boxCollider;
 
     private void Awake()
-    {
-        run = 1.0f;
+    { 
         direction = 1.0f;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -39,22 +37,12 @@ public class player_begin : MonoBehaviour
         UpdateColliderSize();
 
         inputVec.x = Input.GetAxisRaw("Horizontal");
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            run = 2.0f;
-            animator.SetBool("run", true);
-        }
-        else
-        {
-            run = 1.0f;
-            animator.SetBool("run", false);
-        }
         animator.SetFloat("Speed", inputVec.magnitude);
     }
 
     private void FixedUpdate()
     {
-        Vector2 nextVec = inputVec * Speed * run * direction * Time.fixedDeltaTime;
+        Vector2 nextVec = inputVec * Speed * direction * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + nextVec);
 
         if (inputVec.x > 0) spriteRenderer.flipX = false;
