@@ -107,15 +107,18 @@ public class TeleportLevelRoomInB : MonoBehaviour
 			confiner.InvalidatePathCache();
         }
 
-		//적(늑대) 텔포
-		if(enemyObj != null)
+		if (GameManagerInB.instance.warewolfController.startChasing == true)
 		{
-			//지정된 시간동안 대기 후
-			yield return new WaitForSeconds(enemyTeleportDelay);
-			//늑대 텔포
-			enemyObj.transform.position = toObj.transform.position;
-			//늑대 움직임 다시 시작
-			GameManagerInB.instance.warewolfController.flag = 1.0f;
+			//적(늑대) 텔포
+			if (enemyObj != null)
+			{
+				//지정된 시간동안 대기 후
+				yield return new WaitForSeconds(enemyTeleportDelay);
+				//늑대 텔포
+				enemyObj.transform.position = toObj.transform.position;
+				//늑대 움직임 다시 시작
+				GameManagerInB.instance.warewolfController.flag = 1.0f;
+			}
 		}
 
 		yield return new WaitForSeconds(teleportCoolDown);

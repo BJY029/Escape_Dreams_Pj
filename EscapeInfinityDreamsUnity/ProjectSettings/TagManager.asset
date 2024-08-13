@@ -30,6 +30,7 @@ TagManager:
   - WrongWay
   - autoDoor
   - diary
+  - Escape
   layers:
   - Default
   - TransparentFX

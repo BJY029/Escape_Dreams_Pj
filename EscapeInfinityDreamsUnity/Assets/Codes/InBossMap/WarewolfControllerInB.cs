@@ -57,7 +57,12 @@ public class WarewolfControllerInB : MonoBehaviour
 		UpdateColliderSize();
 
 		//따라오는 상황이 아니면 따라오지 않는다.
-		if (startChasing == false) return;
+		if (startChasing == false)
+		{
+			movement = Vector2.zero;
+			isRunning = false;
+			return;
+		}
 
 		//방향 계산
 		Vector2 direction = (GameManagerInB.instance.player.transform.position - transform.position).normalized;

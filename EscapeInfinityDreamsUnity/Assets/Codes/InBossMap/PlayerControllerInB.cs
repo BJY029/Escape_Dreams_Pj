@@ -211,6 +211,12 @@ public class PlayerControllerInB : MonoBehaviour
 		{
 			RoomFlag = -1;
 		}
+		else if (collision.CompareTag("Escape"))
+		{
+			RoomFlag = 10;
+			Debug.Log("changed State");
+			GameManagerInB.instance.warewolfController.startChasing = false;
+		}
 
 	}
 
