@@ -17,6 +17,7 @@ public class GameManagerInB : MonoBehaviour
 	public SceneControllerInB sceneControllerInB;
 	public AudioControllerInB audioControllerInB;
 	public DialogeControllerInB dialogeControllerInB;
+	public PlayerZoomInCameraInB playerZoomInCameraInB;
 	private void Awake()
 	{
 		instance = this;
