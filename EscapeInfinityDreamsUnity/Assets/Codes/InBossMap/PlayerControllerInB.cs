@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
@@ -19,6 +20,9 @@ public class PlayerControllerInB : MonoBehaviour
 	private float WalkSoundTimer;
 	public float RunSoundInterval = 0.2f;
 	private float RunSoundTimer;
+
+	private bool isAutoRunning;
+	public GameObject autoRunTarget;
 
 	Rigidbody2D rb;
 	public Animator animator;	
@@ -42,6 +46,7 @@ public class PlayerControllerInB : MonoBehaviour
 		isWalking = false;
 		isRunning = false;
 		animator.SetBool("IsAlive", true);
+		isAutoRunning = false;
 	}
 
 	public void InitAll()
@@ -69,6 +74,14 @@ public class PlayerControllerInB : MonoBehaviour
 			flag = 0f;
 			return;
 		}
+
+
+		if (isAutoRunning)
+		{
+			AutoRun();
+			return;
+		}
+
 
 
 		flag = 1.0f;
@@ -214,8 +227,9 @@ public class PlayerControllerInB : MonoBehaviour
 		else if (collision.CompareTag("Escape"))
 		{
 			RoomFlag = 10;
-			Debug.Log("changed State");
 			GameManagerInB.instance.warewolfController.startChasing = false;
+			
+			StartAutoRun();
 		}
 
 	}
@@ -225,6 +239,37 @@ public class PlayerControllerInB : MonoBehaviour
 		if(collision.CompareTag("WareWolfSpawnTime"))
 		{
 			collision.gameObject.SetActive(false);
+		}
+	}
+
+	void StartAutoRun()
+	{
+		isAutoRunning = true;
+		run = 2.0f;
+		animator.SetBool("run", true);
+		StartCoroutine(GameManagerInB.instance.playerZoomInCameraInB.SwitchZoomInCamera());
+		//GameManagerInB.instance.playerZoomInCameraInB.SwitchToDefaultCamera();
+	}
+
+	void AutoRun()
+	{
+		Vector3 currentPosition = rb.position;
+		Vector2 directionToTarget = (autoRunTarget.transform.position - currentPosition).normalized;
+
+		Vector2 nextVec = directionToTarget * Speed * run * Time.deltaTime;
+		rb.MovePosition(rb.position + nextVec);
+
+		if(Vector2.Distance(currentPosition, autoRunTarget.transform.position) < 0.1f)
+		{
+			isAutoRunning = false;
+			animator.SetBool("run", false);
+		}
+
+		RunSoundTimer -= Time.deltaTime;
+		if (RunSoundTimer <= 0f)
+		{
+			StartCoroutine(GameManagerInB.instance.audioControllerInB.playGrassWalkSound());
+			RunSoundTimer = RunSoundInterval;
 		}
 	}
 }

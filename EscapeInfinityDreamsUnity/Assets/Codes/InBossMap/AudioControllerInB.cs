@@ -9,7 +9,8 @@ public class AudioControllerInB : MonoBehaviour
     //걷는 효과음 클립들을 저장할 리스트
     public AudioClip WareWolfRoar;
     public AudioClip[] walkClips;
-    public AudioClip[] wolfWalkClips;
+	public AudioClip[] grassWalkClips;
+	public AudioClip[] wolfWalkClips;
     public AudioClip[] attackClips;
     public AudioClip[] ObjClips;
     //걷는 효과음을 랜덤 재생 하기위한 선언
@@ -55,6 +56,17 @@ public class AudioControllerInB : MonoBehaviour
         //재생
         GameManagerInB.instance.playerController.audioSource.Play();
         yield return null;
+	}
+
+	public IEnumerator playGrassWalkSound()
+	{
+		//랜덤 인덱스 선정
+		randomIdx = Random.Range(0, grassWalkClips.Length);
+		//선정된 인덱스에 해당되는 오디오 클립을 플레이어의 오디오 소스에 삽입
+		GameManagerInB.instance.playerController.audioSource.clip = grassWalkClips[randomIdx];
+		//재생
+		GameManagerInB.instance.playerController.audioSource.Play();
+		yield return null;
 	}
 
 	public IEnumerator playWolfWalkSound()

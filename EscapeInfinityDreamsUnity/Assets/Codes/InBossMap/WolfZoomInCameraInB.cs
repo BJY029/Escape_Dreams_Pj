@@ -12,6 +12,7 @@ public class WolfZoomInCameraInB : MonoBehaviour
 
 	public CinemachineVirtualCamera playerCamera;
 
+
 	//줌인 카메라 우선순위 증가
 	public void SwitchToZoomCamera()
 	{
