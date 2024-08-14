@@ -75,9 +75,10 @@ public class PlayerControllerInB : MonoBehaviour
 			return;
 		}
 
-
+		//만약 자동 달리기가 활성화 되면
 		if (isAutoRunning)
 		{
+			//밑의 움직임 방식 대신, AutoRun 함수로 움직임을 통제한다.
 			AutoRun();
 			return;
 		}
@@ -184,6 +185,11 @@ public class PlayerControllerInB : MonoBehaviour
 			GameManagerInB.instance.warewolfController.Execute();
 		}
 
+		if (collision.CompareTag("fadeOut"))
+		{
+			StartCoroutine(GameManagerInB.instance.lightControllerInB.FadeGlobalLight());
+		}
+
 		if (collision.CompareTag("Hall"))
 		{
 			RoomFlag = 0;
@@ -226,9 +232,11 @@ public class PlayerControllerInB : MonoBehaviour
 		}
 		else if (collision.CompareTag("Escape"))
 		{
+			//마지막 탈출 맵과 collider가 충돌하면
 			RoomFlag = 10;
 			GameManagerInB.instance.warewolfController.startChasing = false;
 			
+			//자동 달리기 함수를 호출한다.
 			StartAutoRun();
 		}
 
@@ -244,27 +252,36 @@ public class PlayerControllerInB : MonoBehaviour
 
 	void StartAutoRun()
 	{
+		//자동 달리기 플래그 활성화
 		isAutoRunning = true;
+		//달리기 속도 지정
 		run = 2.0f;
+		//애니메이션 지정
 		animator.SetBool("run", true);
+		//카메라 줌 아웃 설정
 		StartCoroutine(GameManagerInB.instance.playerZoomInCameraInB.SwitchZoomInCamera());
 		//GameManagerInB.instance.playerZoomInCameraInB.SwitchToDefaultCamera();
 	}
 
 	void AutoRun()
 	{
+		//내 위치
 		Vector3 currentPosition = rb.position;
+		//목표 위치
 		Vector2 directionToTarget = (autoRunTarget.transform.position - currentPosition).normalized;
 
+		//다음 위치
 		Vector2 nextVec = directionToTarget * Speed * run * Time.deltaTime;
 		rb.MovePosition(rb.position + nextVec);
 
+		//만약 목표 지점에 다달으면, 움직임 정지
 		if(Vector2.Distance(currentPosition, autoRunTarget.transform.position) < 0.1f)
 		{
 			isAutoRunning = false;
 			animator.SetBool("run", false);
 		}
 
+		//걷는 사운드 재생 함수
 		RunSoundTimer -= Time.deltaTime;
 		if (RunSoundTimer <= 0f)
 		{

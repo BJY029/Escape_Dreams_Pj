@@ -31,6 +31,8 @@ TagManager:
   - autoDoor
   - diary
   - Escape
+  - fadeOut
+  - EndingScene
   layers:
   - Default
   - TransparentFX

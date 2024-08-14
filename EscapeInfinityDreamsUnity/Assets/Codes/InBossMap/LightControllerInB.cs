@@ -10,6 +10,7 @@ public class LightControllerInB : MonoBehaviour
     public Light2D PlayerLight;
 
     public float fadeDuration = 2.0f;
+    public float GlobalFadeDuration = 4.0f;
 
     public SpriteRenderer Player;
 
@@ -27,6 +28,24 @@ public class LightControllerInB : MonoBehaviour
         {
             AllLightsIntensity[i] = AllLights[i].intensity;
         }
+	}
+
+    public IEnumerator FadeGlobalLight()
+    {
+        float elaspedTime = 0f;
+		float TargetIntensity = 0f;
+
+		GlobalLight.intensity = GlobalLightIntensity;
+
+		while (elaspedTime < GlobalFadeDuration)
+		{
+			GlobalLight.intensity = Mathf.Lerp(GlobalLightIntensity, TargetIntensity, elaspedTime / fadeDuration);
+
+			elaspedTime += Time.deltaTime;
+			yield return null;
+		}
+
+		GlobalLight.intensity = TargetIntensity;
 	}
 
     public IEnumerator PlayerDeadLight()
