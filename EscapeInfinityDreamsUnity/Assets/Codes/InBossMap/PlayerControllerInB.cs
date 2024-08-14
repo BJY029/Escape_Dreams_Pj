@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class PlayerControllerInB : MonoBehaviour
 {
@@ -174,6 +175,10 @@ public class PlayerControllerInB : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
+		if (collision.CompareTag("EndingScene")){
+			SceneManager.LoadScene("EndingScene");
+		}
+
 		if (collision.CompareTag("WareWolfSpawnTime"))
 		{
 			GameManagerInB.instance.warewolfController.activeSprite();
