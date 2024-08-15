@@ -22,7 +22,7 @@ public class sceneController : MonoBehaviour
 
         //대화창 노출 작업 진행
 		GameManager.Instance.catDialogController.gameObject.SetActive(true);
-		yield return StartCoroutine(GameManager.Instance.catDialogController.dialogController());
+		yield return StartCoroutine(GameManager.Instance.catDialogController.startSceneDialog());
 		SceneisStarting = false;
 	}
 }

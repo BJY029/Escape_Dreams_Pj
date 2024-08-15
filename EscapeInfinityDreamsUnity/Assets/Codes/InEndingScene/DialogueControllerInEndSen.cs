@@ -54,7 +54,7 @@ public class DialogueControllerInEndSen : MonoBehaviour
 		//스페이스 키나 ,e키가 눌릴 때 까지 기다린 후
 		yield return new WaitUntil(() => (Input.GetKeyDown(KeyCode.Space)) || Input.GetKeyDown(KeyCode.E));
 
-		dialogueText.fontSize = 40;
+		dialogueText.fontSize = 90;
 		dialogueText.color = Color.red;
 		StartTyping("\"내가 널 포기할 것 같아?\"");
 

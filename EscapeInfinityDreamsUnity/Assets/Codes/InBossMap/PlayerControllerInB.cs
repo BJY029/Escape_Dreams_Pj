@@ -159,8 +159,8 @@ public class PlayerControllerInB : MonoBehaviour
 		Vector2 nextVec = inputVec * flag * Speed * run * direction * Time.fixedDeltaTime;
 		rb.MovePosition(rb.position + nextVec);
 
-		if (inputVec.x > 0) spriteRenderer.flipX = false;
-		else if(inputVec.x < 0)spriteRenderer.flipX = true;
+		if (inputVec.x < 0) spriteRenderer.flipX = false;
+		else if(inputVec.x > 0)spriteRenderer.flipX = true;
 		
 	}
 

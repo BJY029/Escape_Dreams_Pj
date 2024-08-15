@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b64918d2350a35646bed70545397232f
+guid: 8be8884a76916824bb7a4ec254d43296
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player_Run_0
+      name: player_Dead_0
       rect:
         serializedVersion: 2
-        x: 8
+        x: 9
         y: 1
         width: 15
-        height: 56
+        height: 54
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ad18774b25f98e47ba34ac1f8b34391
-      internalID: -953296787
+      spriteID: a9018a0472f07434a8ce07a9f94b96b5
+      internalID: 2146792992
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_Run_1
+      name: player_Dead_1
       rect:
         serializedVersion: 2
-        x: 38
+        x: 41
         y: 1
-        width: 20
-        height: 56
+        width: 19
+        height: 51
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30cbe1a163b38624e9608ccd0efc5830
-      internalID: 2049217287
+      spriteID: 25d56c4ffc837f94494c315e64103529
+      internalID: -397176073
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_Run_2
+      name: player_Dead_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 67
         y: 1
-        width: 29
-        height: 56
+        width: 25
+        height: 49
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9bb640d3e4099042974a529c53c3276
-      internalID: -888368319
+      spriteID: 68d23e5d11d0689419ca5f106f48a07c
+      internalID: -695734100
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_Run_3
+      name: player_Dead_3
       rect:
         serializedVersion: 2
-        x: 98
+        x: 99
         y: 1
-        width: 28
-        height: 56
+        width: 36
+        height: 49
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,20 +174,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4719a59856117d54380749090949993d
-      internalID: 158411174
+      spriteID: d9d14b89c7539104d9740219ac6781bb
+      internalID: 824912742
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_Run_4
+      name: player_Dead_4
       rect:
         serializedVersion: 2
-        x: 132
+        x: 138
         y: 1
-        width: 24
-        height: 56
+        width: 53
+        height: 49
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,8 +195,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ca4a6230c9916a4ea281d184edf2fca
-      internalID: 113461298
+      spriteID: 19e25b5c720f16844a0535e259149995
+      internalID: -37278069
       vertices: []
       indices: 
       edges: []
@@ -212,11 +212,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      player_Run_0: -953296787
-      player_Run_1: 2049217287
-      player_Run_2: -888368319
-      player_Run_3: 158411174
-      player_Run_4: 113461298
+      player_Dead_0: 2146792992
+      player_Dead_1: -397176073
+      player_Dead_2: -695734100
+      player_Dead_3: 824912742
+      player_Dead_4: -37278069
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
