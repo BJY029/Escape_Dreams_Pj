@@ -11,7 +11,7 @@ public class PlayerZoomInCameraInB : MonoBehaviour
 	public void SwitchToDefaultCamera()
 	{
 		playerCamera.Priority = 0;
-		defaultCamera.Priority = 1;
+		defaultCamera.Priority = 10;
 	}
 
 	public IEnumerator SwitchZoomInCamera()

@@ -5,6 +5,7 @@ using UnityEngine;
 public class AudioControllerInB : MonoBehaviour
 {
     public AudioSource[] audioSources;
+    public AudioSource forChased;
 
     //걷는 효과음 클립들을 저장할 리스트
     public AudioClip WareWolfRoar;
@@ -16,6 +17,8 @@ public class AudioControllerInB : MonoBehaviour
     //걷는 효과음을 랜덤 재생 하기위한 선언
     private int randomIdx;
     private int idx = 0;
+
+    public float fadeDuration = 3.0f;
 
 
     public void openingDoor()
@@ -89,7 +92,29 @@ public class AudioControllerInB : MonoBehaviour
         GameManagerInB.instance.warewolfController.audioSource.Play();
 	}
 
-    public IEnumerator attackPlay()
+    public void PlayChased()
+    {
+        forChased.volume = 0.7f;
+        forChased.Play();
+    }
+
+	public IEnumerator ChasedFadeOut()
+	{
+        float elaspedTime = 0;
+        float Volume = forChased.volume;
+		
+        while(fadeDuration > elaspedTime)
+        {
+            forChased.volume = Mathf.Lerp(Volume, 0f, elaspedTime / fadeDuration);
+
+            elaspedTime += Time.deltaTime;
+            yield return null;
+		}
+
+        forChased.volume = 0f;
+	}
+
+	public IEnumerator attackPlay()
     {
         //리스트 길이만큼
         while(idx < attackClips.Length)
@@ -104,4 +129,6 @@ public class AudioControllerInB : MonoBehaviour
 		}
         idx = 0;   
     }
+
+
 }

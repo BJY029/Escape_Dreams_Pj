@@ -176,6 +176,8 @@ public class WarewolfControllerInB : MonoBehaviour
 		//코루틴이 진행되는 동안, 플레이어 움직임을 제한하기 위한 플래그
 		isActiveWolfRun = true;
 
+		GameManagerInB.instance.audioControllerInB.PlayChased();
+
 		//카메라 전환
 		GameManagerInB.instance.wolfZoomInCameraInB.SwitchToZoomCamera();
 		//전환 간 대기
@@ -222,14 +224,14 @@ public class WarewolfControllerInB : MonoBehaviour
 		//플레이어로 카메라를 줌인 하는 함수 호출
 		GameManagerInB.instance.wolfZoomInCameraInB.SwitchToZoomCameraToPlayer();
 
-		
+		GameManagerInB.instance.audioControllerInB.forChased.volume = 0.2f;
 
 		//플레이어 사망 애니메이션 설정
 		GameManagerInB.instance.playerController.animator.SetBool("IsAlive", false);
 		GameManagerInB.instance.playerController.animator.Play("die_0");
 		//빛 효과 연출
 		yield return GameManagerInB.instance.lightControllerInB.PlayerDeadLight();
-		//yield return new WaitForSeconds(2.0f);
+		yield return new WaitForSeconds(1.0f);
 
 		//재시작 안내 UI 노출
 		GameManagerInB.instance.UIControllerInB.activeDeadStateUI();

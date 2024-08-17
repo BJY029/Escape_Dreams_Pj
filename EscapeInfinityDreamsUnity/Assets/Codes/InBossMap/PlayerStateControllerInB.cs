@@ -52,6 +52,8 @@ public class PlayerStateControllerInB : MonoBehaviour
 		//시간 다시 흐르게
 		Time.timeScale = 1f;
 
+		GameManagerInB.instance.audioControllerInB.forChased.Stop();
+
 		//각종 작업 초기화
 		GameManagerInB.instance.warewolfController.InitAll();
 		GameManagerInB.instance.playerController.InitAll();

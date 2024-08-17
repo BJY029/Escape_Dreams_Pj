@@ -10,6 +10,7 @@ public class DialogueControllerInEndSen : MonoBehaviour
 	public float typingSpeed = 0.05f;
 	public float activeTime;
 	public bool istyping;
+	public AudioSource audioSource;
 
 	private void Awake()
 	{
@@ -84,6 +85,7 @@ public class DialogueControllerInEndSen : MonoBehaviour
 		foreach (char letter in sentence.ToCharArray())
 		{
 			dialogueText.text += letter;
+			audioSource.Play();
 			yield return new WaitForSeconds(typingSpeed);
 		}
 		//플래그 초기화

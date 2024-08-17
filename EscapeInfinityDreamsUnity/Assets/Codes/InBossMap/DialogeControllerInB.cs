@@ -10,12 +10,14 @@ public class DialogeControllerInB : MonoBehaviour
 	public float typingSpeed = 0.05f;
 	public float activeTime;
 	public bool istyping;
+	private AudioSource AudioSource;
 
 	private void Awake()
 	{
 		istyping = false;
 		canvas.SetActive(false);
 		dialogueText.text = "";
+		AudioSource = GetComponent<AudioSource>();
 	}
 
 	public IEnumerator StartDialogeInScene()
@@ -69,6 +71,7 @@ public class DialogeControllerInB : MonoBehaviour
 		foreach (char letter in sentence.ToCharArray())
 		{
 			dialogueText.text += letter;
+			AudioSource.Play();
 			yield return new WaitForSeconds(typingSpeed);
 		}
 		//플래그 초기화

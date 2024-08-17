@@ -240,7 +240,7 @@ public class PlayerControllerInB : MonoBehaviour
 			//마지막 탈출 맵과 collider가 충돌하면
 			RoomFlag = 10;
 			GameManagerInB.instance.warewolfController.startChasing = false;
-			
+			StartCoroutine(GameManagerInB.instance.audioControllerInB.ChasedFadeOut());
 			//자동 달리기 함수를 호출한다.
 			StartAutoRun();
 		}
