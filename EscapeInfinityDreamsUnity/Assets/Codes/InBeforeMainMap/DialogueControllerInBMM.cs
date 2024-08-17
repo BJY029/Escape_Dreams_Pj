@@ -15,6 +15,8 @@ public class DialogueControllerInBMM : MonoBehaviour
 	public float activeTime;
 	public bool istyping;
 
+	public AudioSource audioSource;
+
 	private void Awake()
 	{
 		istyping = false;
@@ -157,6 +159,7 @@ public class DialogueControllerInBMM : MonoBehaviour
 		foreach (char letter in sentence.ToCharArray())
 		{
 			dialogueText.text += letter;
+			audioSource.Play();
 			yield return new WaitForSeconds(typingSpeed);
 		}
 		//플래그 초기화

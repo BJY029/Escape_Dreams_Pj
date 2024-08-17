@@ -11,10 +11,19 @@ public class transfer : MonoBehaviour
     public GameObject interactionUI; // 배경을 포함한 UI 오브젝트(text_background)
     public Vector3 uiOffset; // UI 오브젝트의 출력 위치 조정
 
-    private void Start()
+	public string targetSceneName; // 검사할 씬의 이름을 설정할 수 있는 변수
+    public string currentSceneName;
+
+	private void Start()
     {
         interactionUI.SetActive(false); //시작할 때, 텍스트를 숨김
-    }
+
+		// 현재 활성화된 씬을 가져옵니다
+		Scene currentScene = SceneManager.GetActiveScene();
+
+		// 현재 씬의 이름을 가져옵니다
+		currentSceneName = currentScene.name;
+	}
 
     // Update is called once per frame
     void Update()
@@ -45,7 +54,7 @@ public class transfer : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         //플레이어와 오브젝트의 충돌이 끝나면 canMoveScene을 false로 설정한다.
-        if(collision.CompareTag("Player") && canMoveScene == false)
+        if(collision.CompareTag("Player") && currentSceneName == targetSceneName)
         {
             canMoveScene = false;
             interactionUI.SetActive(false); // 텍스트를 숨김

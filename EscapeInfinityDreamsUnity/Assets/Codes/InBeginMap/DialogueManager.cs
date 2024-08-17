@@ -13,6 +13,8 @@ public class DialogueManager : MonoBehaviour
     private bool isDialogueActive = false;  //대사가 나오고 있는지 여부
     private Coroutine autoAdvanceCoroutine;  //자동으로 대사가 넘어가는 코루틴
 
+    public AudioSource audioSource;
+
     private void Start()
     {
         sentences = new Queue<string>();  //큐 초기화
@@ -60,7 +62,8 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = "";                          //텍스트를 비움
         foreach (char letter in sentence.ToCharArray())  //문장을 한 글자씩 반복
         {
-            dialogueText.text += letter;                 //텍스트에 글자를 추가
+            dialogueText.text += letter;                 //텍스트에 글자를 추가\
+            audioSource.Play();
             yield return new WaitForSeconds(0.05f);      //다음 글자 타이핑 전에 대기
         }
     }

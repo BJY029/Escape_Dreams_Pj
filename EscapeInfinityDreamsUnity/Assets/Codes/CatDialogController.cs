@@ -15,6 +15,8 @@ public class CatDialogController : MonoBehaviour
 	public float activeTime;
 	public bool istyping;
 
+	public AudioSource audioSource;
+
 	//초기화
 	private void Awake()
 	{
@@ -134,7 +136,7 @@ public class CatDialogController : MonoBehaviour
 		playerIcon.gameObject.SetActive(false);
 		catIcon.gameObject.SetActive(true);
 		//해당 텍스트를 StartTyping 함수를 통해 출력
-		StartTyping("냥~");
+		StartTyping("냥~ 참고로 이 방에는 이상현상이 발생하지 않는다냥~");
 		//타이핑이 다 될때까지 기다린 후
 		yield return new WaitUntil(() => !istyping);
 		//스페이스 키나 ,e키가 눌릴 때 까지 기다린 후
@@ -200,6 +202,7 @@ public class CatDialogController : MonoBehaviour
 		foreach (char letter in sentence.ToCharArray())
 		{
 			dialogueText.text += letter;
+			audioSource.Play();
 			yield return new WaitForSeconds(typingSpeed);
 		}
 		//플래그 초기화
