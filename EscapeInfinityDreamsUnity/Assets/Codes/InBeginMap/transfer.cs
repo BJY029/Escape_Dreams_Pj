@@ -54,7 +54,7 @@ public class transfer : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         //플레이어와 오브젝트의 충돌이 끝나면 canMoveScene을 false로 설정한다.
-        if(collision.CompareTag("Player") && currentSceneName == targetSceneName)
+        if(collision.CompareTag("Player"))
         {
             canMoveScene = false;
             interactionUI.SetActive(false); // 텍스트를 숨김
