@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
+    public AudioSource audioSourceForWalk;
 
     private void Start() // 시작하면 
     {
         Time.timeScale = 0f; //모두 멈춤
+        audioSourceForWalk.mute = true;
     }
 
     public void GameStart() //시작버튼 클릭시
     {
         Time.timeScale = 1.0f; // 원상 복구
-
-    }
+		audioSourceForWalk.mute = false;
+	}
 
     public void GameQuit() //종료버튼 클릭시
     {

@@ -1164,8 +1164,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueManager: {fileID: 167252684}
   dialogueLines:
-  - "(\uD5E5\uD5E5)\uBB34\uC2A8 \uBCD1\uC6D0\uC774 \uC774\uB807\uAC8C \uC678\uC9C4
-    \uACF3\uC5D0 \uC788\uC9C0?"
+  - "\uBB34\uC2A8 \uBCD1\uC6D0\uC774 \uC774\uB807\uAC8C \uC678\uC9C4 \uACF3\uC5D0
+    \uC788\uC9C0?"
   - "\uC784\uC0C1\uC2DC\uD5D8 \uC54C\uBC14\uCE58\uACE4 \uAE09\uC5EC\uAC00 \uB192\uB358\uB370,
     \uC774\uC720\uAC00 \uC788\uC5C8\uB124."
   - "\uADF8\uB798\uB3C4 \uB2F9\uC7A5 \uBC00\uB9B0 \uC6D4\uC138\uB97C \uB0B4\uB824\uBA74
@@ -1347,8 +1347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueManager: {fileID: 167252684}
   dialogueLines:
-  - "(\uD5C8\uB984\uD55C \uBCD1\uC6D0\uC744 \uBCF4\uBA70) \uB098 \uC7A5\uAE30 \uD138\uB9AC\uB294\uAC74
-    \uC544\uB2C8\uACA0\uC9C0...?"
+  - "......\uB098 \uC7A5\uAE30 \uD138\uB9AC\uB294\uAC74 \uC544\uB2C8\uACA0\uC9C0...?"
   triggerPosition: {x: 16.71, y: -1, z: 0}
 --- !u!61 &306548668
 BoxCollider2D:
@@ -1876,6 +1875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e08e15044b8c78499ab942777989e18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSourceForWalk: {fileID: 873672493}
 --- !u!1 &450920273
 GameObject:
   m_ObjectHideFlags: 0
@@ -4171,7 +4171,7 @@ MonoBehaviour:
   targetObj: {fileID: 0}
   MainScene: BeforeMainScene
   interactionUI: {fileID: 779104480}
-  uiOffset: {x: -1.2, y: 0.6, z: 0}
+  uiOffset: {x: -0.2, y: 1.2, z: 0}
   targetSceneName: 
   currentSceneName: 
 --- !u!50 &1223065055
@@ -4730,6 +4730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e08e15044b8c78499ab942777989e18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSourceForWalk: {fileID: 873672493}
 --- !u!1 &1353912465
 GameObject:
   m_ObjectHideFlags: 0
@@ -4761,7 +4762,7 @@ Animator:
   m_GameObject: {fileID: 1353912465}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1aa105c3828aec2479d38f38ae6ad793, type: 2}
+  m_Controller: {fileID: 22100000, guid: e82a8e02d16c1d448b83f5642849d4e2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4813,9 +4814,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 2081291317, guid: b1a51f7e013563845a90335e630870c8, type: 3}
+  m_Sprite: {fileID: 2021437732, guid: b44db0b23be6ccf459a40490a42a6751, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1.25, y: 2.125}
@@ -4865,7 +4866,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 0
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &1353912470
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4902,7 +4903,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.25, y: 2.125}
+    oldSize: {x: 0.6, y: 2.16}
     newSize: {x: 1.25, y: 2.125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

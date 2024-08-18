@@ -79,8 +79,8 @@ public class player_begin : MonoBehaviour
         Vector2 nextVec = inputVec * Speed * direction * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + nextVec);
 
-        if (inputVec.x > 0) spriteRenderer.flipX = false;
-        else if (inputVec.x < 0) spriteRenderer.flipX = true;
+        if (inputVec.x > 0) spriteRenderer.flipX = true;
+        else if (inputVec.x < 0) spriteRenderer.flipX = false;
 
     }
 
