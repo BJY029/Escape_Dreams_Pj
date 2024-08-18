@@ -253,6 +253,11 @@ public class PlayerControllerInB : MonoBehaviour
 		{
 			collision.gameObject.SetActive(false);
 		}
+
+		if (collision.CompareTag("Escape"))
+		{
+			GameManagerInB.instance.playerZoomInCameraInB.SwitchVoidCam();
+		}
 	}
 
 	void StartAutoRun()
