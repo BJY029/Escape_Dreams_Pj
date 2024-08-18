@@ -100,10 +100,10 @@ TextureImporter:
       name: New_player_Run 1_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 1
-        width: 15
-        height: 56
+        x: 0
+        y: 0
+        width: 32
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -121,10 +121,10 @@ TextureImporter:
       name: New_player_Run 1_1
       rect:
         serializedVersion: 2
-        x: 37
-        y: 1
-        width: 21
-        height: 56
+        x: 32
+        y: 0
+        width: 32
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,9 +143,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 1
-        width: 29
-        height: 56
+        y: 0
+        width: 32
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,10 +163,10 @@ TextureImporter:
       name: New_player_Run 1_3
       rect:
         serializedVersion: 2
-        x: 101
-        y: 1
-        width: 20
-        height: 56
+        x: 96
+        y: 0
+        width: 32
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,10 +184,10 @@ TextureImporter:
       name: New_player_Run 1_4
       rect:
         serializedVersion: 2
-        x: 130
-        y: 1
-        width: 28
-        height: 55
+        x: 128
+        y: 0
+        width: 32
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,27 +197,6 @@ TextureImporter:
       bones: []
       spriteID: d2da718da9a519342bd9785090e49e02
       internalID: 883540680
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: New_player_Run 1_5
-      rect:
-        serializedVersion: 2
-        x: 164
-        y: 1
-        width: 23
-        height: 55
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 559fd495e7193f54c8fe266c70ee6e19
-      internalID: 1764638628
       vertices: []
       indices: 
       edges: []
@@ -238,7 +217,6 @@ TextureImporter:
       New_player_Run 1_2: -1371477858
       New_player_Run 1_3: -65985808
       New_player_Run 1_4: 883540680
-      New_player_Run 1_5: 1764638628
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
