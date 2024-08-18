@@ -93,6 +93,7 @@ public class Player : MonoBehaviour
 		//만약 플레이어가 사망했다면, 해당 입력키 제한
 		if (GameManager.Instance.playerAnimationController.playerDeadCoroutine == true)
 		{
+			animator.SetFloat("Speed", 0f);
 			uiSystem.eventSystem.enabled = false;
 			return;
 		}

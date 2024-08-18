@@ -39,10 +39,9 @@ public class playerAnimationController : MonoBehaviour
 			if (animator.GetBool("IsAlive") == true)
 			{
 				GameManager.Instance.playerController.flag = 0f;
-				Dead(); //상태 변경 함수 호출
+
 						//관련 코루틴 실행
 				StartCoroutine(PlayerDeadRoutine());
-
 			}
 		}
 
@@ -70,9 +69,15 @@ public class playerAnimationController : MonoBehaviour
     //플레이어 사망 코루틴
     public IEnumerator PlayerDeadRoutine()
 	{
-		animator.SetFloat("Speed", 0f); 
 		//해당 코루틴이 실행되는 중임을 알리는 플래그
 		playerDeadCoroutine = true;
+
+		animator.SetBool("isDrinking", true);
+		yield return new WaitForSeconds(1f);
+		animator.SetBool("isDrinking", false);
+		yield return new WaitForSeconds(1f);
+		animator.SetBool("IsAlive", false);
+
 
 		//상호작용 UI가 활성화 되어있으면, 비활성화
 		if (GameManager.Instance.uiSystem.interactionUI.activeSelf == true)
