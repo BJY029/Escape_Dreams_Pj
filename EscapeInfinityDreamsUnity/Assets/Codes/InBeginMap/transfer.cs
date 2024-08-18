@@ -57,7 +57,12 @@ public class transfer : MonoBehaviour
         if(collision.CompareTag("Player"))
         {
             canMoveScene = false;
-            interactionUI.SetActive(false); // ÅØ½ºÆ®¸¦ ¼û±è
+            if (interactionUI != null)
+            {
+                interactionUI.SetActive(false); // ÅØ½ºÆ®¸¦ ¼û±è
+            }
+
+
         }
     }
 }

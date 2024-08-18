@@ -224,7 +224,7 @@ public class WarewolfControllerInB : MonoBehaviour
 		//플레이어로 카메라를 줌인 하는 함수 호출
 		GameManagerInB.instance.wolfZoomInCameraInB.SwitchToZoomCameraToPlayer();
 
-		GameManagerInB.instance.audioControllerInB.forChased.volume = 0.2f;
+		GameManagerInB.instance.audioControllerInB.forChased.volume = 0.1f;
 
 		//플레이어 사망 애니메이션 설정
 		GameManagerInB.instance.playerController.animator.SetBool("IsAlive", false);

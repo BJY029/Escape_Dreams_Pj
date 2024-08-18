@@ -237,6 +237,11 @@ public class UiSystem : MonoBehaviour
 		//해당 상호작용 텍스트를 다음과 같이 변경
 		sleepText.text = "잠에 드는 중..";
 
+		//LightController의 FadeOutLight() 코루틴 호출
+		yield return StartCoroutine(lightController.FadeOutLight());
+
+	
+
 		//만약 이상현상이 발생한 상태에서 침대와 상호작용 하면 레벨을 상승시킨다.
 		//추가로 현재 레벨이 0인 상태에서는 이상현상이 발생하지 않아도 다음 단계로 진행해야 하므로, 추가로 조건을 설정한다.
 		if (GameManager.Instance.isAbnormal == true || GameManager.Instance.isAbnormal == false && GameManager.level == 0)
@@ -251,9 +256,7 @@ public class UiSystem : MonoBehaviour
 			GameManager.Instance.abnorbalManager.Init();
 		}
 
-		//LightController의 FadeOutLight() 코루틴 호출
-		yield return lightController.FadeOutLight();
-
+		
 
 		this.Awake();
 

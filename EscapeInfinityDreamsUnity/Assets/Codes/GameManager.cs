@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
 		//레벨을 모두 클리어 하여 8이 되면
 		if (level == 8)
 		{
+			
 			//씬 전환
 			SceneManager.LoadScene("BossScene");
 			return true;

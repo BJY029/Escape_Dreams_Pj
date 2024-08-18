@@ -94,7 +94,7 @@ public class AudioControllerInB : MonoBehaviour
 
     public void PlayChased()
     {
-        forChased.volume = 0.7f;
+        forChased.volume = 0.4f;
         forChased.Play();
     }
 
