@@ -14,8 +14,12 @@ public class UiSystem : MonoBehaviour
     public GameObject Extensonmeter; //신장계 UI
     public GameObject Ab_Extensonmeter; //신장계 이상현상 UI
 	public GameObject DeadStateUi;
+	public GameObject PlayerBedLocation;
+	public GameObject PlayerRespawnLocation;
+	public GameObject CatRespawnLocation;
+	public SpriteRenderer CatSpriteRen;
 
-    [Header("# UI Set")]
+	[Header("# UI Set")]
 	public GameObject interactionUI; // 배경을 포함한 UI 오브젝트(text_background)
 	public GameObject interactionUIforOut; //종이 UI에서 생성할 UI 오브젝트
 	public Vector3 uiOffset; // UI 오브젝트의 출력 위치 조정
@@ -35,6 +39,7 @@ public class UiSystem : MonoBehaviour
 
     //중복 키 적용을 막기 위한 플래그 설정
     public bool isBedCoroutineRunning = false;
+	public bool isPlayerSleeping = false;
 	public bool isPaperisVisualable = false;
 	public EventSystem eventSystem;
 
@@ -127,10 +132,13 @@ public class UiSystem : MonoBehaviour
 					StartCoroutine(extRoutine());
 					break;
                 case 4:
-					//잠에 들 때 씬 전환과 각종 효과들을 위한 코루틴 호출
-					StartCoroutine(bedRoutine());
+					if (GameManager.Instance.sceneManager.SceneisStarting == false)
+					{
+						//잠에 들 때 씬 전환과 각종 효과들을 위한 코루틴 호출
+						StartCoroutine(bedRoutine());
+					}
 					break;
-                case 6:
+				case 6:
                     //신장계 이상현상 UI를 활성화 시키는 코루틴 호출
                     StartCoroutine(Ab_extRoutine());
                     break;
@@ -217,6 +225,11 @@ public class UiSystem : MonoBehaviour
     IEnumerator bedRoutine()
 	{
 		isBedCoroutineRunning = true; //이벤트 시스템 비활성화를 위한 플래그 설정
+		isPlayerSleeping = true;
+
+		GameManager.Instance.player.transform.position = PlayerBedLocation.transform.position;
+		
+		animator.SetBool("isSleeping", true);
 
 		//재생중인 모든 효과음 중지
 		GameManager.Instance.audioController.StopPlayAudio();
@@ -243,6 +256,14 @@ public class UiSystem : MonoBehaviour
 
 
 		this.Awake();
+
+		isPlayerSleeping = false;
+
+		GameManager.Instance.player.transform.position = PlayerRespawnLocation.transform.position;
+		GameManager.Instance.cat.transform.position = CatRespawnLocation.transform.position;
+		CatSpriteRen.flipX = false;
+		animator.SetBool("isSleeping", false);
+		
 
 		yield return lightController.FadeInLight();
 

@@ -31,7 +31,7 @@ public class playerAnimationController : MonoBehaviour
 	private void Update()
 	{
 		//(임시) X키가 눌리면 플레이어는 사망한다.
-		if (Input.GetKeyDown(KeyCode.X))
+		if (Input.GetKeyDown(KeyCode.X) && GameManager.Instance.sceneManager.SceneisStarting == false)
 		{
 			//만약에 침대와 상호 중이면, 사망 키 발동은 제한하는 조건문, 추가로 종이 UI와 상호작용 중일때도 발동을 제한한다.
 			if (GameManager.Instance.uiSystem.isBedCoroutineRunning == true || GameManager.Instance.uiSystem.isPaperisVisualable == true) return;
@@ -47,7 +47,7 @@ public class playerAnimationController : MonoBehaviour
 		}
 
 		//만약 플레이어가 현재 사망한 상태이고, 리스폰이 가능한 시점(PlayerDeadRouine 코루틴이 끝난 시점)인 경우에 r키가 눌리면
-		if (Input.GetKeyDown(KeyCode.R) && canRespawn == true)
+		if (Input.GetKeyDown(KeyCode.R) && canRespawn == true && GameManager.Instance.sceneManager.SceneisStarting == false)
 		{
 			StartCoroutine(RespawnRoutine());
 		}

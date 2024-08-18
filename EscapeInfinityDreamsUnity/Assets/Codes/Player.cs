@@ -82,10 +82,11 @@ public class Player : MonoBehaviour
 		//코루틴이 실행중이면
 		if (uiSystem.isBedCoroutineRunning == true || GameManager.Instance.playerAnimationController.isRespawning == true)
 		{
+			animator.SetFloat("Speed", 0f);
 			//이벤트 시스템 비활성화 = 입력 제한
 			uiSystem.eventSystem.enabled = false;
 			flag = 0; //이동 중에 상호작용 시 오류 방지 위한 추가 플래그
-			animator.Play("Idle_0");//나중에 잠 자는 애니매이션이 추가되면 변경
+			//animator.Play("Idle_0");//나중에 잠 자는 애니매이션이 추가되면 변경
 			return;
 		}
 
@@ -176,13 +177,13 @@ public class Player : MonoBehaviour
 		//플레이어의 이동방향ㅁ에 맞게 스프라이트가 바라보는 방향 수정
 		if (direction < 0)	//이동 방향이 반대인 경우, 바라보는 방향도 반대로 설정
 		{
-			if (inputVec.x > 0) spriteRenderer.flipX = true;
-			else if (inputVec.x < 0) spriteRenderer.flipX = false;
+			if (inputVec.x > 0) spriteRenderer.flipX = false;
+			else if (inputVec.x < 0) spriteRenderer.flipX = true;
 		}
 		else
 		{
-			if (inputVec.x > 0) spriteRenderer.flipX = false;
-			else if (inputVec.x < 0) spriteRenderer.flipX = true;
+			if (inputVec.x > 0) spriteRenderer.flipX = true;
+			else if (inputVec.x < 0) spriteRenderer.flipX = false;
 		}
 	}
 
