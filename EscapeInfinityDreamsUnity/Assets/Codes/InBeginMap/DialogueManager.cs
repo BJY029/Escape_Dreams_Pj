@@ -66,7 +66,7 @@ public class DialogueManager : MonoBehaviour
             audioSource.Play();
             yield return new WaitForSeconds(0.05f);      //다음 글자 타이핑 전에 대기
         }
-    }
+	}
 
     IEnumerator AutoAdvanceToNextSentence()   //일정 시간 후에 자동으로 다음 대사로 넘어가는 코루틴
     {

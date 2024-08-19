@@ -40,6 +40,18 @@ public class MainMenu : MonoBehaviour
     #endif
     }
 
+    public void GameMenuOn()
+    {
+        Time.timeScale = 0f;
+		audioSourceForWalk.mute = true;
+	}
+
+    public void GameMenuOff()
+    {
+        Time.timeScale = 1.0f;
+		audioSourceForWalk.mute = false;
+	}
+
     public IEnumerator FadeSprite()
     {
         float elapsedTime = 0f;

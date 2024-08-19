@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.Rendering.Universal;
 
 public class playerAnimationController : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class playerAnimationController : MonoBehaviour
 	public bool playerDeadCoroutine;
 	public bool canRespawn;
 	public bool isRespawning;
+
+	public SpriteRenderer catSprite;
 
 	private CinemachineBrain CinemachineBrain;
 	public CinemachineVirtualCameraBase targetCamera;
@@ -105,6 +108,7 @@ public class playerAnimationController : MonoBehaviour
 		//리스폰 위치로 플레이어와 고양이 이동
 		GameManager.Instance.player.transform.position = PlayerRespawnLocation.transform.position;
 		GameManager.Instance.cat.transform.position = CatRespawnLocation.transform.position;
+		catSprite.flipX = false;
 
 		//만약 이상현상이 발생하지 않은 상태에서 자살을 택하면, 레벨을 상승하고, 다음 단계로 진행한다.
 		if (GameManager.Instance.isAbnormal == false)

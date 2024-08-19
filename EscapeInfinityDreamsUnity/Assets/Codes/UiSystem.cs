@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.EventSystems;
 
+
 public class UiSystem : MonoBehaviour
 {
 	[Header("# triggerTagObj")]
@@ -43,6 +44,8 @@ public class UiSystem : MonoBehaviour
 	public bool isPaperisVisualable = false;
 	public EventSystem eventSystem;
 
+	private AudioSource audioSource;
+
 	//애니메이션
 	Animator animator;
 
@@ -65,6 +68,7 @@ public class UiSystem : MonoBehaviour
         Ab_Extensonmeter.SetActive(false);
 		DeadStateUi.SetActive(false);
 		animator = GetComponent<Animator>();
+		audioSource = GetComponent<AudioSource>();
 
 		animator.SetBool("IsAlive", true);
         sleepText.text ="E키로 상호작용";
@@ -167,6 +171,7 @@ public class UiSystem : MonoBehaviour
 	IEnumerator PaperInRoutine()
 	{
 		isPaperisVisualable = true; //해당 코루틴 활성화 되는 중에 자살 방지를 위한 플래그 설정
+		audioSource.mute = true;
 		isUiActived = true; //종이 UI가 활성화 되었음을 선언
 		Paper.SetActive(true);	//종이 UI 활성화
 		interactionUI.SetActive(false); //상호작용 UI는 비활성화
@@ -184,6 +189,7 @@ public class UiSystem : MonoBehaviour
 		Paper.SetActive(false);	//종이 UI 비활성화
 		interactionUI.SetActive(true);	//상호작용 UI 활성화
 		interactionUIforOut.SetActive(false);	//종이 UI에서 나가기 위한 UI 비활성화
+		audioSource.mute = false;
 		yield return new WaitForEndOfFrame();	//한프레임 대기
 		
 		Time.timeScale = 1.0f; //시간 다시 흐르도록 설정
